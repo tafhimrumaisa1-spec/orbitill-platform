@@ -1,0 +1,115 @@
+{
+  "_meta": {
+    "version": "0.1.0",
+    "owner_note": "SoilBrain owns crop RULES (calendars, feasibility). AquaSense owns only the water-physics coefficients below, shipped as a typed fixture so the module runs standalone. Integration should REPLACE stage lengths with SoilBrain's validated calendar. status values: published_reference (taken from a cited table, not local) | proxy (nearest crop in a cited table) | engineering_assumption | unverified_placeholder (plausible, NOT backed by a citation we could read).",
+    "kc_ini_note": "Kc ini cells of FAO-56 Table 12 were image-blank in our machine extraction; values were entered from the standard Table 12 reproduction and should be eyeballed once by a human against the PDF."
+  },
+  "crops": {
+    "t_aman_rice": {
+      "names": {"en": "T. Aman rice (transplanted, monsoon)", "bn": "রোপা আমন ধান"},
+      "kind": "paddy", "region_scope": ["BD"],
+      "kc": {"ini": 1.05, "mid": 1.20, "end": 0.75, "end_low": 0.60, "end_high": 0.90, "source": "FAO56", "locator": "Table 12 (rice 1.05/1.20/0.90-0.60); Table 14 ini for paddy, humid/light wind = 1.05", "status": "published_reference"},
+      "height_m": 1.0,
+      "stage_days": {"ini": 30, "dev": 30, "mid": 60, "late": 30, "source": "FAO56", "locator": "Table 11 rice, tropics (150 d)", "status": "unverified_placeholder", "note": "Counted from transplanting in this model. Bangladesh variety durations differ; replace with SoilBrain/BRRI variety calendar."},
+      "water_sensitive_stages": ["mid"],
+      "paddy": {
+        "percolation_mm_day": {"low": 4.0, "high": 8.0, "source": "FAO_IDP_RICE_WATER", "status": "published_reference", "note": "4 heavy clay ... 8 sandy. Barind puddled-soil rate must be measured locally."},
+        "land_prep_saturation_mm": {"value": 200.0, "source": "FAO_IDP_RICE_WATER", "status": "published_reference"},
+        "establishment_layer_mm": {"value": 100.0, "source": "FAO_IDP_RICE_WATER", "status": "published_reference"},
+        "ponding_target_mm": {"value": 50.0, "source": "WOCAT_AWD_BD", "status": "published_reference", "note": "AWD wet phase re-flooded to ~5 cm; reused as continuous shallow flooding target"},
+        "max_ponding_mm": {"value": 100.0, "source": "AQUASENSE_ASSUMPTION", "status": "engineering_assumption", "note": "Overflow above bund/spill height; user should enter measured bund height"},
+        "awd_dry_storage_mm": {"low": 3.0, "high": 15.0, "source": "AQUASENSE_ASSUMPTION", "status": "engineering_assumption", "note": "Water lost from saturated soil between surface-saturation and the 15 cm field-water-tube trigger = 150 mm x drainable porosity (~0.02-0.10 assumed). Needs local calibration."}
+      }
+    },
+    "boro_rice": {
+      "names": {"en": "Boro rice (irrigated dry-season)", "bn": "বোরো ধান"},
+      "kind": "paddy", "region_scope": ["BD"],
+      "kc": {"ini": 1.05, "mid": 1.20, "end": 0.75, "end_low": 0.60, "end_high": 0.90, "source": "FAO56", "locator": "Table 12", "status": "published_reference"},
+      "height_m": 1.0,
+      "stage_days": {"ini": 30, "dev": 30, "mid": 60, "late": 30, "source": "FAO56", "locator": "Table 11 rice Dec planting, tropics (150 d)", "status": "unverified_placeholder", "note": "Replace with BRRI Boro variety calendar from SoilBrain."},
+      "water_sensitive_stages": ["mid"],
+      "paddy": {
+        "percolation_mm_day": {"low": 4.0, "high": 8.0, "source": "FAO_IDP_RICE_WATER", "status": "published_reference"},
+        "land_prep_saturation_mm": {"value": 200.0, "source": "FAO_IDP_RICE_WATER", "status": "published_reference"},
+        "establishment_layer_mm": {"value": 100.0, "source": "FAO_IDP_RICE_WATER", "status": "published_reference"},
+        "ponding_target_mm": {"value": 50.0, "source": "WOCAT_AWD_BD", "status": "published_reference"},
+        "max_ponding_mm": {"value": 100.0, "source": "AQUASENSE_ASSUMPTION", "status": "engineering_assumption"},
+        "awd_dry_storage_mm": {"low": 3.0, "high": 15.0, "source": "AQUASENSE_ASSUMPTION", "status": "engineering_assumption"}
+      }
+    },
+    "wheat": {
+      "names": {"en": "Wheat (rabi)", "bn": "গম"},
+      "kind": "upland", "region_scope": ["BD"],
+      "kc": {"ini": 0.30, "mid": 1.15, "end": 0.33, "end_low": 0.25, "end_high": 0.40, "source": "FAO56", "locator": "Table 12 spring wheat 0.3/1.15/0.25-0.4", "status": "published_reference"},
+      "height_m": 1.0,
+      "stage_days": {"ini": 15, "dev": 25, "mid": 50, "late": 30, "source": "FAO56", "locator": "Table 11 Barley/Oats/Wheat, November, Central India (120 d)", "status": "published_reference", "note": "Nearest published South Asian analogue; not a Bangladesh variety calendar."},
+      "root": {"zr_min_m": 0.25, "zr_max_range_m": [1.0, 1.5], "zr_min_source": "AQUASENSE_ASSUMPTION", "zr_max_source": "FAO56", "zr_locator": "Table 22 (spring wheat 1.0-1.5 m)"},
+      "p_table22": 0.55, "p_locator": "Table 22",
+      "water_sensitive_stages": ["mid"]
+    },
+    "chickpea": {
+      "names": {"en": "Chickpea", "bn": "ছোলা"},
+      "kind": "upland", "region_scope": ["BD"],
+      "kc": {"ini": 0.40, "mid": 1.00, "end": 0.35, "source": "FAO56", "locator": "Table 12 chick pea 0.4/1.0/0.35", "status": "published_reference"},
+      "height_m": 0.4,
+      "stage_days": {"ini": 20, "dev": 30, "mid": 40, "late": 20, "source": "AQUASENSE_ASSUMPTION", "status": "unverified_placeholder", "note": "110 d total is a plausible placeholder only; no readable BARI chickpea duration source was found. Replace via SoilBrain."},
+      "root": {"zr_min_m": 0.20, "zr_max_range_m": [0.6, 1.0], "zr_min_source": "AQUASENSE_ASSUMPTION", "zr_max_source": "FAO56", "zr_locator": "Table 22 chick pea"},
+      "p_table22": 0.50, "p_locator": "Table 22",
+      "water_sensitive_stages": ["mid"],
+      "local_evidence": [{"source": "KHAN_2026_CHICKPEA", "note": "Godagari (Rajshahi) trials: moisture at pod development is critical for seed yield; irrigation depths not extracted."}]
+    },
+    "lentil": {
+      "names": {"en": "Lentil", "bn": "মসুর"},
+      "kind": "upland", "region_scope": ["BD"],
+      "kc": {"ini": 0.40, "mid": 1.10, "end": 0.30, "source": "FAO56", "locator": "Table 12 lentil 0.4/1.1/0.3", "status": "published_reference"},
+      "height_m": 0.5,
+      "stage_days": {"ini": 20, "dev": 30, "mid": 40, "late": 20, "source": "ISLAM_2015_BARI", "status": "unverified_placeholder", "note": "Total 110 d from BARI Masur-4/5/6 (Kushtia trial); split across stages is an assumption."},
+      "root": {"zr_min_m": 0.20, "zr_max_range_m": [0.6, 0.8], "zr_min_source": "AQUASENSE_ASSUMPTION", "zr_max_source": "FAO56", "zr_locator": "Table 22 lentil"},
+      "p_table22": 0.50, "p_locator": "Table 22",
+      "water_sensitive_stages": ["mid"]
+    },
+    "mustard": {
+      "names": {"en": "Mustard (short-duration)", "bn": "সরিষা"},
+      "kind": "upland", "region_scope": ["BD"],
+      "kc": {"ini": 0.35, "mid": 1.075, "mid_low": 1.0, "mid_high": 1.15, "end": 0.35, "source": "FAO56", "locator": "Table 12 Rapeseed/Canola 0.35/1.0-1.15/0.35 (PROXY for mustard)", "status": "proxy"},
+      "height_m": 0.6,
+      "stage_days": {"ini": 15, "dev": 20, "mid": 30, "late": 15, "source": "KHAN_2025_MUSTARD", "status": "unverified_placeholder", "note": "80 d total consistent with BARI Sarisha-14 (76-84 d, two sources); split across stages is an assumption."},
+      "root": {"zr_min_m": 0.20, "zr_max_range_m": [1.0, 1.5], "zr_min_source": "AQUASENSE_ASSUMPTION", "zr_max_source": "FAO56", "zr_locator": "Table 22 rapeseed/canola (proxy)"},
+      "p_table22": 0.60, "p_locator": "Table 22 rapeseed/canola (proxy)",
+      "water_sensitive_stages": ["mid"]
+    },
+    "mungbean": {
+      "names": {"en": "Mungbean", "bn": "মুগডাল"},
+      "kind": "upland", "region_scope": ["BD"],
+      "kc": {"ini": 0.40, "mid": 1.05, "end": 0.475, "end_low": 0.35, "end_high": 0.60, "source": "FAO56", "locator": "Table 12 green gram & cowpeas 0.4/1.05/0.60-0.35", "status": "proxy"},
+      "height_m": 0.4,
+      "stage_days": {"ini": 15, "dev": 20, "mid": 20, "late": 10, "source": "AQUASENSE_ASSUMPTION", "status": "unverified_placeholder", "note": "65 d placeholder; no readable BARI Mung duration source was found."},
+      "root": {"zr_min_m": 0.20, "zr_max_range_m": [0.6, 0.9], "zr_min_source": "AQUASENSE_ASSUMPTION", "zr_max_source": "FAO56", "zr_locator": "Table 22 beans dry & pulses (proxy)"},
+      "p_table22": 0.45, "p_locator": "Table 22 beans dry & pulses (proxy)",
+      "water_sensitive_stages": ["mid"]
+    },
+    "maize_grain_us": {
+      "names": {"en": "Field corn (US generic)", "bn": "ভুট্টা (যুক্তরাষ্ট্র)"},
+      "kind": "upland", "region_scope": ["US"],
+      "kc": {"ini": 0.30, "mid": 1.20, "end": 0.475, "end_low": 0.35, "end_high": 0.60, "source": "FAO56", "locator": "Table 12 maize field (grain) 0.3/1.2/0.60-0.35", "status": "published_reference"},
+      "height_m": 2.0,
+      "stage_days": {"ini": 30, "dev": 40, "mid": 50, "late": 30, "source": "FAO56", "locator": "Table 11 maize grain, April, Spain/California (150 d)", "status": "unverified_placeholder", "note": "NOT Iowa. Iowa planting-to-maturity must come from USDA/ISU data before any Iowa claim."},
+      "root": {"zr_min_m": 0.25, "zr_max_range_m": [1.0, 1.7], "zr_min_source": "AQUASENSE_ASSUMPTION", "zr_max_source": "FAO56", "zr_locator": "Table 22 maize field"},
+      "p_table22": 0.55, "p_locator": "Table 22",
+      "water_sensitive_stages": ["mid"]
+    }
+  },
+  "texture_classes": {
+    "_source": "FAO56_ANNEX1_NV",
+    "_note": "theta_fc and theta_wp ranges m3/m3 and available water (theta_fc - theta_wp) range as printed (FAO-56 Table 19). Barind soils (e.g. 48/24/28 sand/silt/clay at Godagari, Vance 2015) fall between sandy loam and loam/clay-loam classes: use measured values.",
+    "sand":       {"fc": [0.07, 0.17], "wp": [0.02, 0.07], "aw": [0.05, 0.11]},
+    "loamy_sand": {"fc": [0.11, 0.19], "wp": [0.03, 0.10], "aw": [0.06, 0.12]},
+    "sandy_loam": {"fc": [0.18, 0.28], "wp": [0.06, 0.16], "aw": [0.11, 0.15]},
+    "loam":       {"fc": [0.20, 0.30], "wp": [0.07, 0.17], "aw": [0.13, 0.18]},
+    "silt_loam":  {"fc": [0.22, 0.36], "wp": [0.09, 0.21], "aw": [0.13, 0.19]},
+    "silt":       {"fc": [0.28, 0.36], "wp": [0.12, 0.22], "aw": [0.16, 0.20]},
+    "silty_clay_loam": {"fc": [0.30, 0.37], "wp": [0.17, 0.24], "aw": [0.13, 0.18]},
+    "silty_clay": {"fc": [0.30, 0.42], "wp": [0.17, 0.29], "aw": [0.13, 0.19]},
+    "clay":       {"fc": [0.32, 0.40], "wp": [0.20, 0.24], "aw": [0.12, 0.20]}
+  }
+}

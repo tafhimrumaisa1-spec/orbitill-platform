@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "defaultRegionId": "GLOBAL",
+  "regions": [
+    {
+      "regionId": "GLOBAL",
+      "countryCode": null,
+      "label": "Global Explorer",
+      "mode": "exploration",
+      "analyses": {
+        "climate": "available",
+        "soil": "conditional",
+        "water": "conditional",
+        "rotation": "requires_local_profile",
+        "economics": "requires_local_profile"
+      },
+      "missingInputs": ["local_crop_calendar", "local_soil_constraints", "local_price_and_cost_basis"],
+      "limitations": ["Global environmental access does not establish locally validated farm recommendations."]
+    },
+    {
+      "regionId": "BD-RAJ-BARIND",
+      "countryCode": "BD",
+      "label": "Barind Highlands",
+      "mode": "research_pilot",
+      "analyses": {
+        "climate": "available",
+        "soil": "conditional",
+        "water": "research_pilot",
+        "rotation": "research_pilot",
+        "economics": "conditional"
+      },
+      "missingInputs": ["field_soil_measurement", "verified_local_prices_and_costs"],
+      "limitations": ["NASA POWER represents a regional grid cell and cannot measure field rainfall or root-zone soil water directly."]
+    },
+    {
+      "regionId": "BD-COASTAL",
+      "countryCode": "BD",
+      "label": "Coastal Bangladesh",
+      "mode": "conditional",
+      "analyses": {
+        "climate": "available",
+        "soil": "requires_salinity_evidence",
+        "water": "conditional",
+        "rotation": "requires_local_profile",
+        "economics": "requires_local_profile"
+      },
+      "missingInputs": ["dated_soil_or_irrigation_water_salinity", "local_crop_calendar", "local_economics"],
+      "limitations": ["Satellite and gridded climate data cannot replace a local salinity measurement."]
+    },
+    {
+      "regionId": "US-IA-STORY",
+      "countryCode": "US",
+      "label": "Story County, Iowa",
+      "mode": "research_pilot",
+      "analyses": {
+        "climate": "available",
+        "soil": "conditional",
+        "water": "conditional",
+        "rotation": "research_pilot",
+        "economics": "conditional"
+      },
+      "missingInputs": ["integrated_usda_soil_and_crop_evidence", "verified_local_prices_and_costs"],
+      "limitations": ["The US pilot uses its own regional references and never supplies attributes to Bangladesh farms."]
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "build_version": "terralens.admin.v1",
+  "built_at_utc": "2026-11-15T13:56:14Z",
+  "inputs": {
+    "geoBoundaries-BGD-ADM0_simplified.geojson": {
+      "bytes": 57643,
+      "sha256": "4cfafa6d5250a0aadeefb8737f11604ad1b9b9904585461fee2a5ece4a61a219"
+    },
+    "geoBoundaries-BGD-ADM1_simplified.geojson": {
+      "bytes": 92247,
+      "sha256": "bb91b74c7a7d8a690122b916f5e2f99606d2ce2f18ff938f49d80f15b4ba6aea"
+    },
+    "geoBoundaries-BGD-ADM2_simplified.geojson": {
+      "bytes": 1686112,
+      "sha256": "7dbdb186f3b8af10417147a99859196fcd89c619fb5c6ac3804251fb6b449b6a"
+    },
+    "geoBoundaries-BGD-ADM3_simplified.geojson": {
+      "bytes": 3986002,
+      "sha256": "141dfd271206602793dd0b0af26d4db918be19cff56c1fac46b17dfeb0cbe006"
+    },
+    "geoBoundaries-USA-ADM1_simplified.geojson": {
+      "bytes": 5469814,
+      "sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe"
+    },
+    "geoBoundaries-USA-ADM2_simplified.geojson": {
+      "bytes": 7938450,
+      "sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a"
+    },
+    "ne_110m_admin_0_countries.geojson": {
+      "bytes": 838726,
+      "sha256": "6866c877d39cba9c357620878839b336d569f8c662d3cfab4cb1dbe2d39c977f"
+    },
+    "ne_50m_admin_0_countries.geojson": {
+      "bytes": 3083490,
+      "sha256": "3e458fc036ad0a66411f2c1e6cac49c5d7bfb81cb1123bc513b22511a2b7fdeb"
+    },
+    "openadmindata_districts.html": {
+      "bytes": 22016,
+      "sha256": "b8fd1719ad7dee596d52b41eadb6f6eac0ebe04d6908de9f4135495698735fba"
+    },
+    "openadmindata_upazilas.html": {
+      "bytes": 130534,
+      "sha256": "01d3450c141fc7f52fc2a2456f3162d141adc3514215d1c0f687c6f16c224463"
+    }
+  },
+  "counts": {
+    "bd_adm1": 8,
+    "bd_adm2": 64,
+    "bd_adm3": 544,
+    "us_ia_counties": 99,
+    "countries": 242,
+    "barind_districts": 8,
+    "coastal_districts": 19,
+    "story_county": "US-IA-ADM2-story"
+  },
+  "warnings": [],
+  "bilingual": {
+    "districts_matched": 64,
+    "upazilas_matched": 400,
+    "upazilas_source": 495,
+    "districts_source": 64
+  },
+  "outputs": [
+    {
+      "file": "bd_adm1.geojson",
+      "bytes": 44588,
+      "sha256": "97715fdb108eb7517a13834bc023ec04e773bf087b59587d72cd945f6369a8cd"
+    },
+    {
+      "file": "bd_adm2.geojson",
+      "bytes": 786596,
+      "sha256": "88f134cd312ad80a8228255e1c2b27cc865c426ec56da585da0684c3ffb4a400"
+    },
+    {
+      "file": "bd_adm3.geojson",
+      "bytes": 2056281,
+      "sha256": "ed59503f578e4195f3676fa33b37dbae988862adc8a5f799dd7dcf676e6d9c85"
+    },
+    {
+      "file": "index.json",
+      "bytes": 314951,
+      "sha256": "b700081c63fc90d16518cfa4a3c3a302bc1f55ad14cd159763d6fea418944450"
+    },
+    {
+      "file": "us_adm1.geojson",
+      "bytes": 2601353,
+      "sha256": "3f1bf7f738e1478d81b42ce2ae689001f7db391780222a02b2b69434e7b2265b"
+    },
+    {
+      "file": "us_ia_adm1.geojson",
+      "bytes": 18785,
+      "sha256": "2538770b99361acab7850c531c71096118718c305fbee0d3f25eb2561a9ee5e7"
+    },
+    {
+      "file": "us_ia_adm2.geojson",
+      "bytes": 76699,
+      "sha256": "827f99c98250a81ed8928a149a55dd278269520fec492548f41aebe089523fda"
+    },
+    {
+      "file": "world_countries.geojson",
+      "bytes": 1957464,
+      "sha256": "69533590f937b3f34e61e7fba9f8aebec59c32ce06944086c9adfb03d1a6b683"
+    }
+  ],
+  "dataVersion": "3332eba9b9407b22"
+}

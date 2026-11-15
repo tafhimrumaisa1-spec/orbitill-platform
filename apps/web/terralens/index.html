@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="description" content="TerraLens Region Explorer — an honest geospatial instrument for Bangladesh, the US research pilot and the world. NASA layers at their native footprint, never as farm measurements.">
+<title>TerraLens · Region Explorer</title>
+<link rel="stylesheet" href="./vendor/maplibre/maplibre-gl.css">
+<link rel="stylesheet" href="./vendor/fonts/fonts.css">
+<link rel="stylesheet" href="./styles.css">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <nav class="orbitill-nav" aria-label="ORBITILL navigation">
+    <button type="button" class="orbitill-back" id="orbitill-back" aria-label="Go back">←</button>
+    <a class="orbitill-home" href="../index.html">ORBITILL</a>
+    <span aria-hidden="true"></span>
+    <a href="../index.html">Global</a>
+    <a href="../bangladesh.html">Bangladesh</a>
+    <a href="../usa.html">USA</a>
+  </nav>
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 32 32" role="img" aria-label="TerraLens mark">
+      <circle cx="16" cy="16" r="13.5" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".55"/>
+      <path d="M3 18c4-1 6-4 9-4s4 3 7 3 5-3 9-4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="21.5" cy="10.5" r="2.4" fill="var(--accent)"/>
+    </svg>
+    <div class="brand-text">
+      <span class="brand-name">TerraLens</span>
+      <span class="brand-sub">Region Explorer</span>
+    </div>
+  </div>
+  <div class="topbar-meta">
+    <span class="data-pill" id="data-pill" title="Boundary bundle version">data · <span id="data-version">…</span></span>
+    <div class="locale-switch" role="group" aria-label="Interface language">
+      <button type="button" data-locale="en" class="is-active" aria-pressed="true">EN</button>
+      <button type="button" data-locale="bn" aria-pressed="false" lang="bn">বাংলা</button>
+    </div>
+    <button type="button" class="icon-btn" id="about-btn" data-i18n-aria-label="aboutBtn" data-i18n-title="aboutBtn" aria-label="About this instrument" title="About this instrument">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 10.5v6M12 7.4v.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main" class="workspace">
+
+  <!-- ------------------------------------------------------------------ left -->
+  <aside class="rail rail--left" aria-label="Location and regional context">
+    <div class="rail-scroll">
+
+      <section class="intro">
+        <p class="eyebrow" data-i18n="eyebrow">NASA Space Apps · ORBITILL / RootShift</p>
+        <h1 data-i18n-html="headline">Read the ground.<br><em>Know the limits.</em></h1>
+        <p class="lede" data-i18n="lede">A regional lens on real geography. Boundaries, NASA products and their native footprints — with the evidence that is missing said out loud.</p>
+      </section>
+
+      <section class="block" aria-labelledby="pilots-title">
+        <div class="block-head">
+          <h2 id="pilots-title" data-i18n="pilots">Pilot regions</h2>
+          <span class="block-note" data-i18n="pilotsNote">one click</span>
+        </div>
+        <div class="pilot-grid" id="pilot-list"><!-- cards injected --></div>
+      </section>
+
+      <section class="block" aria-labelledby="search-title">
+        <h2 id="search-title" data-i18n="search">Find a place</h2>
+        <form class="search" id="search-form" role="search" autocomplete="off">
+          <label class="sr-only" for="search-input" data-i18n="searchLabel">Search divisions, districts, upazilas, counties or countries</label>
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m15.5 15.5 4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <input id="search-input" name="q" type="search" placeholder="District, upazila, county, country…" data-i18n-placeholder="searchPlaceholder" aria-controls="search-results" aria-expanded="false">
+          <button type="submit" class="search-go" data-i18n="go">Go</button>
+        </form>
+        <ul class="search-results" id="search-results" role="listbox" hidden></ul>
+
+        <form class="coord-form" id="goto-form">
+          <div class="coord-fields">
+            <label class="coord-field">
+              <span data-i18n="lat">Latitude</span>
+              <input id="lat-input" inputmode="decimal" placeholder="24.3745" aria-label="Latitude, decimal degrees">
+            </label>
+            <label class="coord-field">
+              <span data-i18n="lon">Longitude</span>
+              <input id="lon-input" inputmode="decimal" placeholder="88.6042" aria-label="Longitude, decimal degrees">
+            </label>
+          </div>
+          <div class="coord-actions">
+            <button type="submit" class="btn btn--accent" data-i18n="locate">Locate</button>
+            <button type="button" class="btn btn--ghost" id="centre-btn" data-i18n="useCentre">Use map centre</button>
+          </div>
+          <p class="fineprint" data-i18n="coordNote">WGS84 decimal degrees. A point is a location, not a field boundary.</p>
+        </form>
+      </section>
+
+      <section class="block" aria-labelledby="context-title">
+        <div class="block-head">
+          <h2 id="context-title" data-i18n="context">Selected context</h2>
+          <span class="readiness-badge" id="readiness-badge" data-state="exploration">exploration</span>
+        </div>
+        <p class="region-name" id="region-name">—</p>
+        <p class="region-sub" id="region-sub">Loading the boundary bundle…</p>
+        <nav class="breadcrumb" id="admin-chain" aria-label="Administrative hierarchy"></nav>
+        <dl class="fact-grid" id="fact-grid"></dl>
+        <a class="btn btn--farmer" id="farmer-link" href="#" data-i18n="farmer">Open in Farmer Mode</a>
+        <p class="fineprint" id="farmer-note"></p>
+      </section>
+
+      <footer class="rail-foot">
+        <p data-i18n="railFoot">Offline-first boundaries · optional NASA GIBS raster tiles · no API key, no tracking.</p>
+      </footer>
+    </div>
+  </aside>
+
+  <!-- ------------------------------------------------------------------- map -->
+  <section class="map-shell" aria-label="Interactive map">
+    <div id="map" class="map" tabindex="0" role="application" data-i18n-aria-label="mapLabel" aria-label="Map of administrative boundaries and NASA layers"></div>
+    <div id="map-fallback" class="map-fallback" hidden></div>
+    <div class="map-vignette" aria-hidden="true"></div>
+
+    <div class="map-top">
+      <div class="map-tools" role="toolbar" aria-label="Map tools">
+        <button type="button" class="tool" id="zoom-in" data-i18n-aria-label="zoomIn" data-i18n-title="zoomIn" aria-label="Zoom in" title="Zoom in">+</button>
+        <button type="button" class="tool" id="zoom-out" data-i18n-aria-label="zoomOut" data-i18n-title="zoomOut" aria-label="Zoom out" title="Zoom out">−</button>
+        <span class="tool-sep" aria-hidden="true"></span>
+        <button type="button" class="tool tool--wide" id="draw-btn" aria-pressed="false" data-i18n-title="drawTitle" title="Draw a field boundary">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17 9 5l7 4-2 10-10-2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="9" cy="5" r="1.6" fill="currentColor"/></svg>
+          <span data-i18n="draw">Draw field</span>
+        </button>
+        <button type="button" class="tool tool--wide" id="grids-btn" aria-pressed="true" data-i18n-title="gridsTitle" title="Show native grid footprints">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM9.3 4v16M14.6 4v16M4 9.3h16M4 14.6h16" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+          <span data-i18n="grids">Native grids</span>
+        </button>
+      </div>
+      <div class="map-badge" id="map-mode-badge" hidden>static atlas</div>
+    </div>
+
+    <div class="hover-card" id="hover-card" hidden></div>
+
+    <div class="map-bottom">
+      <section class="legend" id="legend" aria-labelledby="legend-title">
+        <header class="legend-head">
+          <h2 id="legend-title" data-i18n="legendTitle">Legend</h2>
+          <span id="legend-mode" class="legend-mode" data-i18n="legendModeBoundaries">boundaries</span>
+        </header>
+        <p class="legend-name" id="legend-name" data-i18n="legendDefaultName">Administrative boundaries</p>
+        <div id="legend-body" class="legend-body"></div>
+      </section>
+      <div class="maplibre" aria-label="Map attribution">
+        <span id="attribution" data-i18n="attribution">Boundaries: geoBoundaries, Natural Earth</span>
+      </div>
+    </div>
+
+    <div class="coord-readout" id="coords" aria-live="off">24.3745° N, 88.6042° E</div>
+
+    <div class="notice" id="offline-notice" hidden>
+      <strong id="notice-title">Raster tiles are offline.</strong>
+      <span id="notice-body">The vector atlas and all region logic still work.</span>
+      <button type="button" class="notice-close" id="notice-close" aria-label="Dismiss">×</button>
+    </div>
+
+    <div class="draw-hint" id="draw-hint" hidden>
+      <span data-i18n="drawHint">Click to place corners. Double-click or press Enter to close. Esc cancels.</span>
+      <button type="button" class="btn btn--tiny" id="draw-finish" data-i18n="finish">Finish</button>
+      <button type="button" class="btn btn--tiny btn--ghost" id="draw-cancel" data-i18n="cancel">Cancel</button>
+    </div>
+  </section>
+
+  <!-- ----------------------------------------------------------------- right -->
+  <aside class="rail rail--right" aria-label="Region intelligence">
+    <div class="tabbar" role="tablist" aria-label="Intelligence panels">
+      <button role="tab" id="tab-region" aria-selected="true" aria-controls="panel-region" data-tab="region" data-i18n="tabRegion">Region</button>
+      <button role="tab" id="tab-field" aria-selected="false" aria-controls="panel-field" data-tab="field" data-i18n="tabField">Field</button>
+      <button role="tab" id="tab-layers" aria-selected="false" aria-controls="panel-layers" data-tab="layers" data-i18n="tabLayers">Layers</button>
+      <button role="tab" id="tab-sources" aria-selected="false" aria-controls="panel-sources" data-tab="sources" data-i18n="tabSources">Sources</button>
+    </div>
+
+    <div class="rail-scroll dossier">
+
+      <section id="panel-region" role="tabpanel" aria-labelledby="tab-region" class="tabpanel">
+        <header class="dossier-head">
+          <p class="eyebrow" id="dossier-region-id">BD-NATIONAL</p>
+          <h2 id="dossier-title">Bangladesh · national context</h2>
+          <p id="dossier-summary" class="dossier-summary"></p>
+          <div class="chip-row" id="dossier-chips"></div>
+          <ul class="field-warnings" id="profile-warnings" hidden></ul>
+        </header>
+
+        <section class="dossier-block">
+          <h3 data-i18n="readinessTitle">Readiness by analysis</h3>
+          <p class="dossier-note" data-i18n="readinessNote">Capped by the selected region pack. Owner services perform the actual computation.</p>
+          <ul class="gate-list" id="gates"></ul>
+        </section>
+
+        <section class="dossier-block">
+          <h3 data-i18n="limitsTitle">Limitations</h3>
+          <ul class="limits" id="limitations"></ul>
+        </section>
+
+        <section class="dossier-block">
+          <h3 data-i18n="missingTitle">Missing requirements</h3>
+          <ul class="missing-list" id="missing-reqs"></ul>
+        </section>
+
+        <section class="dossier-block">
+          <h3 data-i18n="unknownTitle">Typed unknowns</h3>
+          <ul class="unknowns" id="unknowns"></ul>
+        </section>
+
+        <section class="dossier-block">
+          <h3 data-i18n="datasetTitle">Datasets advertised</h3>
+          <ul class="dataset-list" id="datasets"></ul>
+        </section>
+
+        <section class="dossier-block">
+          <h3 data-i18n="footprintTitle">Grid footprints at this point</h3>
+          <p class="dossier-note" data-i18n="footprintNote">Drawn from each product's own grid convention. A cell value belongs to the whole cell, never to a farm inside it.</p>
+          <ul class="footprint-list" id="footprints"></ul>
+        </section>
+      </section>
+
+      <section id="panel-field" role="tabpanel" aria-labelledby="tab-field" class="tabpanel" hidden>
+        <header class="dossier-head">
+          <p class="eyebrow" data-i18n="fieldEyebrow">Farm selection</p>
+          <h2 data-i18n="fieldTitle">A boundary you draw is not a survey</h2>
+          <p class="dossier-summary" data-i18n="fieldIntro">Draw a field on the map, or select an approximate point. Area is computed on a sphere. Footprints show how small the field is next to each native product.</p>
+        </header>
+        <div class="field-actions">
+          <button type="button" class="btn btn--accent" id="field-draw" data-i18n="fieldDraw">Draw field boundary</button>
+          <button type="button" class="btn btn--ghost" id="field-point" data-i18n="fieldUsePoint">Use selected point</button>
+          <button type="button" class="btn btn--ghost" id="field-clear" data-i18n="fieldClear">Clear</button>
+        </div>
+        <div id="field-result"></div>
+      </section>
+
+      <section id="panel-layers" role="tabpanel" aria-labelledby="tab-layers" class="tabpanel" hidden>
+        <header class="dossier-head">
+          <p class="eyebrow" data-i18n="layersEyebrow">Map layers</p>
+          <h2 data-i18n="layersTitle">One environmental layer at a time</h2>
+          <p class="dossier-summary" data-i18n="layersIntro">Every layer keeps its native resolution and time step. The legend repeats the unit, cadence and footprint so the map cannot quietly imply farm-level measurement.</p>
+        </header>
+        <section class="dossier-block">
+          <h3 data-i18n="envLayer">Environmental layer</h3>
+          <div class="layer-list" id="layer-list"></div>
+        </section>
+        <section class="dossier-block">
+          <h3 data-i18n="overlays">Overlays</h3>
+          <div class="overlay-list" id="overlay-list"></div>
+        </section>
+        <section class="dossier-block">
+          <h3 data-i18n="baseLayers">Boundary base</h3>
+          <div class="layer-list layer-list--base" id="base-layer-list"></div>
+        </section>
+        <div class="date-row" id="date-row" hidden>
+          <label for="layer-date" data-i18n="date">Observation date (UTC)</label>
+          <div class="date-controls">
+            <input type="date" id="layer-date">
+            <button type="button" class="btn btn--tiny" id="date-latest" data-i18n="latest">Latest</button>
+          </div>
+          <p class="fineprint" id="date-note"></p>
+        </div>
+      </section>
+
+      <section id="panel-sources" role="tabpanel" aria-labelledby="tab-sources" class="tabpanel" hidden>
+        <header class="dossier-head">
+          <p class="eyebrow" data-i18n="sourcesEyebrow">Evidence trail</p>
+          <h2 data-i18n="sourcesTitle">Sources, licences and limits</h2>
+          <p class="dossier-summary" data-i18n="sourcesIntro">Every advertised layer maps to a registered source. Downloaded boundaries carry a SHA-256. Advertised services name the owning module.</p>
+        </header>
+        <input type="search" id="source-filter" class="source-filter" placeholder="Filter sources…" data-i18n-placeholder="sourceFilter" aria-label="Filter sources">
+        <ul class="source-list" id="sources-list"></ul>
+      </section>
+
+    </div>
+  </aside>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<dialog id="about-dialog" class="about">
+  <form method="dialog">
+    <button class="about-close" data-i18n-aria-label="aboutClose" aria-label="Close">×</button>
+    <p class="eyebrow" data-i18n="aboutEyebrow">About</p>
+    <h2 data-i18n="aboutTitle">What this instrument does — and refuses to do</h2>
+    <p data-i18n-html="aboutP1">TerraLens resolves a coordinate or place to a country, an administrative chain and a regional readiness state. It selects which NASA products may inform an analysis and states their native footprint. It does not fetch environmental values, store crop rules or validate farms.</p>
+    <ul>
+      <li data-i18n-html="aboutLi1"><strong>Boundaries</strong> are cartographic: geoBoundaries (CC0 / CC BY 3.0 IGO) and Natural Earth (public domain). They are not cadastral.</li>
+      <li data-i18n-html="aboutLi2"><strong>NASA layers</strong> are gridded or image products. An SMAP 9 km cell, an IMERG 11 km cell and a 30 m HLS pixel are not measurements of a field.</li>
+      <li data-i18n-html="aboutLi3"><strong>Readiness</strong> stops at <code>research_pilot</code>. <code>validated_with_evidence</code> exists in the shared contract but is never emitted here.</li>
+      <li data-i18n-html="aboutLi4"><strong>Ownership</strong>: EarthSync fetches environmental series, SoilBrain owns crop and soil rules, AquaSense owns water state, RootShift compares rotations, FutureFields computes economics.</li>
+    </ul>
+    <p class="fineprint" data-i18n="aboutFine">No API keys. No analytics. Optional raster tiles come directly from NASA GIBS. MapLibre GL JS 6.18.0 (BSD-3-Clause) is vendored locally.</p>
+  </form>
+</dialog>
+
+<template id="tpl-pilot">
+  <button type="button" class="pilot-card">
+    <span class="pilot-dot" aria-hidden="true"></span>
+    <span class="pilot-label"></span>
+    <span class="pilot-mode"></span>
+  </button>
+</template>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

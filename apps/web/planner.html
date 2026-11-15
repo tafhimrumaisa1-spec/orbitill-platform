@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102d22">
+  <meta name="description" content="ORBITILL RootShift Barind research demonstration">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="planner.css">
+  <link rel="stylesheet" href="planner-mobile.css">
+  <title>RootShift · Barind research demonstration</title>
+</head>
+<body class="planner-body">
+  <header class="planner-nav">
+    <button class="back-button" type="button" data-back aria-label="Go back">←</button>
+    <a class="planner-brand" href="index.html"><span class="seed-mark" aria-hidden="true"><i></i><i></i><i></i></span>ORBITILL</a>
+    <nav aria-label="Research experience"><a href="bangladesh.html">Bangladesh</a><a href="planner.html" aria-current="page">RootShift</a><a href="#evidence">Evidence</a></nav>
+    <span class="pilot-badge"><i></i> Research demonstration</span>
+  </header>
+
+  <main>
+    <section class="planner-intro">
+      <div>
+        <p class="planner-kicker">Barind Highlands · one field · three pathways</p>
+        <h1>Test the assumption.<br><em>Keep the uncertainty visible.</em></h1>
+        <p>This guided comparison uses a verified offline NASA POWER weather series. Soil, irrigation efficiency and incomplete crop calendars remain supplied demonstration assumptions—not measurements from a real farm.</p>
+      </div>
+      <aside class="context-card" aria-label="Demonstration status">
+        <span>Analysis status</span><strong>Conditional</strong>
+        <p>Water implications can be explored. Yield, profit and an overall “best” crop are not calculated.</p>
+      </aside>
+    </section>
+
+    <section class="scenario-workbench" aria-labelledby="scenario-heading">
+      <div class="scenario-controls">
+        <div><p class="section-number">01 / CHANGE THE SEASON</p><h2 id="scenario-heading">What if conditions change?</h2><p>Both controls are applied to every pathway. The rainfall control is a hypothetical stress test, not a forecast.</p></div>
+        <label><span>Rainfall assumption <output id="rain-output">100%</output></span><input id="rainfall" type="range" min="60" max="120" step="5" value="100"></label>
+        <label><span>Seasonal irrigation allowance <output id="water-output">700 mm</output></span><input id="allowance" type="range" min="250" max="900" step="25" value="700"></label>
+        <button class="run-button" id="run-model" type="button">Recompute all pathways <span>→</span></button>
+        <p class="input-note">Demonstration inputs: field capacity 0.30 m³/m³, wilting point 0.15 m³/m³, surface-irrigation efficiency 0.60.</p>
+      </div>
+      <div class="run-panel" aria-live="polite">
+        <div class="run-status"><span id="run-state"><i></i> Waiting for model</span><code id="run-id">No run yet</code></div>
+        <div class="results-grid" id="results"><div class="loading-card">Loading the evidence-backed comparison…</div></div>
+      </div>
+    </section>
+
+    <section class="interpretation" aria-labelledby="interpretation-heading">
+      <p class="section-number">02 / READ THE TRADE-OFF</p>
+      <h2 id="interpretation-heading">Lower water demand is a signal.<br><em>It is not a recommendation.</em></h2>
+      <div class="interpretation-grid">
+        <article><b>Compare</b><p>All pathways use the same NASA source and the same selected irrigation allowance.</p></article>
+        <article><b>Question</b><p>Calendar readiness, soil measurements, market conditions and farmer priorities still determine whether a pathway deserves local investigation.</p></article>
+        <article><b>Verify</b><p>Before acting, replace demonstration soil values and calendars with locally dated evidence.</p></article>
+      </div>
+    </section>
+
+    <section class="evidence-section" id="evidence" aria-labelledby="evidence-heading">
+      <div class="evidence-heading"><p class="section-number">03 / WHY THIS RESULT?</p><h2 id="evidence-heading">Follow the chain<br><em>from observation to comparison.</em></h2><p>Every visible number is returned by the model service. The page does not contain precomputed result values.</p></div>
+      <div class="evidence-panel">
+        <ol><li><b>01</b><span>NASA POWER daily observations</span></li><li><b>02</b><span>Reference crop-water coefficients</span></li><li><b>03</b><span>Explicit farm and calendar assumptions</span></li><li><b>04</b><span>AquaSense water-policy simulation</span></li><li><b>05</b><span>Conditional RootShift comparison</span></li></ol>
+        <div id="evidence-details"><p>Run the comparison to inspect its evidence record.</p></div>
+      </div>
+    </section>
+
+    <section class="planner-next">
+      <div><p class="section-number">04 / KEEP EXPLORING</p><h2>One pilot.<br><em>A global responsibility.</em></h2></div>
+      <div class="next-links"><a href="bangladesh.html"><span>Bangladesh story</span><b>Return to the national context →</b></a><a href="index.html"><span>Global experience</span><b>Explore the planetary story →</b></a><a href="usa.html"><span>United States</span><b>Open the Iowa research pilot →</b></a></div>
+    </section>
+  </main>
+
+  <dialog class="evidence-dialog" id="evidence-dialog" aria-labelledby="dialog-title"><button type="button" data-close aria-label="Close evidence">×</button><div id="dialog-content"></div></dialog>
+  <script src="planner.js" type="module"></script>
+</body>
+</html>

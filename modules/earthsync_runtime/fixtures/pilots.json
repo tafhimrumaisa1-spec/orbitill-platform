@@ -1,0 +1,31 @@
+{
+  "_comment": "Pilot definitions. Coordinates are the *requested* points; POWER values apply to the 0.5x0.625 deg (meteorology) and 1x1 deg (solar) cells containing them.",
+  "pilots": [
+    {
+      "pilot_id": "BD_RAJSHAHI_BARIND",
+      "country_iso": "BD",
+      "label": "Rajshahi (Barind Tract, Rajshahi Division, Bangladesh)",
+      "lat": 24.3745,
+      "lon": 88.6042,
+      "start": "1991-01-01",
+      "end": "2025-12-31",
+      "parameters": ["T2M", "T2M_MAX", "T2M_MIN", "T2MDEW", "PRECTOTCORR", "ALLSKY_SFC_SW_DWN", "RH2M", "WS2M", "PS"],
+      "community": "AG",
+      "why_this_range": "1991-2020 is the WMO standard climate normal period; 2021-2025 adds recent seasons. Gives >30 seasons for reliability statistics.",
+      "role": "flagship deep research pilot"
+    },
+    {
+      "pilot_id": "US_IOWA_STORY",
+      "country_iso": "US",
+      "label": "Story County near Ames, Iowa, USA",
+      "lat": 42.0308,
+      "lon": -93.6319,
+      "start": "1991-01-01",
+      "end": "2025-12-31",
+      "parameters": ["T2M", "T2M_MAX", "T2M_MIN", "T2MDEW", "PRECTOTCORR", "ALLSKY_SFC_SW_DWN", "RH2M", "WS2M", "PS"],
+      "community": "AG",
+      "why_this_range": "Same as BD pilot for comparability. Independent US references (PRISM, CDL, SSURGO, NASS) must be supplied from USDA/OSU, not POWER.",
+      "role": "secondary US research pilot (candidate corn/soy/cover crops)"
+    }
+  ]
+}

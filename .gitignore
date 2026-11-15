@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.venv/
+venv/
+node_modules/
+.vercel/
+.env
+.env.*
+!.env.example
+data/cache/
+apps/web/preview-*.png
+# Superseded by usa-story-v2-tractor.png and not referenced by the application.
+apps/web/assets/usa-story-v1.png
+*.log
+.DS_Store
+Thumbs.db

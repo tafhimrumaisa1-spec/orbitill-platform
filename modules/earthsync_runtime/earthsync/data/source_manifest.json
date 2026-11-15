@@ -1,0 +1,2245 @@
+{
+  "schema_version": "1.0.0",
+  "generated_from": "earthsync.manifest.build_manifest()",
+  "count": 43,
+  "sources": [
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_SMAP",
+      "name": "SMAP enhanced soil moisture",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "Soil Moisture Active Passive (SMAP)",
+      "priority_csv": "P1",
+      "priority_bd": "P1",
+      "priority_us": "P1",
+      "priority_global": "P1",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [
+        "AquaSense",
+        "FieldTwin"
+      ],
+      "decision_role": "Surface soil moisture context, seasonal anomaly",
+      "native_spatial": "9 km EASE-Grid 2.0 (SPL3SMP_E enhanced L3); ~36 km native radiometer footprint",
+      "native_temporal": "Daily composites (2-3 day revisit), 2015-present",
+      "latency": "~1-3 days (check product)",
+      "variables": [
+        "soil_moisture (surface, ~0-5 cm)",
+        "retrieval_qual_flag",
+        "surface_flag"
+      ],
+      "access_method": "Earthdata; NSIDC",
+      "auth_required": "earthdata_login",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "9 km mapped retrievals; topsoil only; no field/root-zone measurement",
+      "license": {
+        "name": "NASA Earth science open data policy",
+        "url": "https://nsidc.org/data/spl3smp_e",
+        "attribution": "NASA NSIDC DAAC",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://nsidc.org/data/spl3smp_e",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Surface soil moisture only: NOT root-zone and NOT a farm measurement. Dense vegetation and flooded paddy degrade retrievals (quality flags required).",
+        "Adapter not implemented: downstream receives adapter_not_implemented, never a guessed value."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_GPM_IMERG",
+      "name": "GPM / IMERG",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "Global Precipitation Measurement (GPM) & IMERG",
+      "priority_csv": "P1",
+      "priority_bd": "P1",
+      "priority_us": "P1",
+      "priority_global": "P1",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [
+        "EarthSync",
+        "AquaSense",
+        "FutureFields"
+      ],
+      "decision_role": "Rainfall amount, distribution, extreme history, comparison with POWER",
+      "native_spatial": "0.1 x 0.1 deg",
+      "native_temporal": "Half-hourly rate (mm/hr); daily accumulation products; 2000-present (V07)",
+      "latency": "Early ~4 h, Late ~12 h, Final ~3.5 months (check product page)",
+      "variables": [
+        "precipitation (mm/hr rate or mm/day accumulation)"
+      ],
+      "access_method": "Earthdata; Giovanni",
+      "auth_required": "earthdata_login",
+      "live_decision": "offline_extract_ingest",
+      "adapter_module": "earthsync.adapters.imerg",
+      "numerical_data": true,
+      "critical_caveat": "Early/Late/Final latency differs; distinguish mm/h rate from mm accumulation",
+      "license": {
+        "name": "NASA Earth science open data policy",
+        "url": "https://gpm.nasa.gov/data/imerg",
+        "attribution": "NASA GES DISC / GPM IMERG",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://gpm.nasa.gov/data/imerg",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Rate vs accumulation: use units.rate_to_depth; never sum 48 rates.",
+        "Run (Early/Late/Final) must be recorded; Final is gauge-calibrated.",
+        "POWER also hosts IMERG (see NASA_POWER_IMERG_PARAM)."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_LANDSAT_MODIS",
+      "name": "Landsat and MODIS/VIIRS vegetation",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "Landsat and MODIS/VIIRS: Reflectance, NDVI, Vegetation Indices",
+      "priority_csv": "P1",
+      "priority_bd": "P1",
+      "priority_us": "P1",
+      "priority_global": "P1",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [
+        "TerraLens",
+        "FieldTwin"
+      ],
+      "decision_role": "NDVI, bare-ground seasonal signals, land-cover context",
+      "native_spatial": "Landsat 30 m; MODIS 250-1000 m; VIIRS 375-750 m",
+      "native_temporal": "Landsat 16-day; MODIS/VIIRS daily",
+      "latency": "Days",
+      "variables": [
+        "surface reflectance",
+        "NDVI/EVI"
+      ],
+      "access_method": "Earthdata; HLS for harmonized Landsat/Sentinel-2",
+      "auth_required": "earthdata_login",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Imagery/NDVI cannot alone identify crops, field disease or nutrient sufficiency",
+      "license": {
+        "name": "NASA/USGS open data",
+        "url": null,
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://hls.gsfc.nasa.gov/hls-data/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Prefer HLS (harmonised Landsat+Sentinel-2) for 30 m time series; coarse MODIS for regional context only."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_POWER",
+      "name": "NASA POWER daily agroclimatology",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "NASA POWER: Agroclimatology & Meteorological Data",
+      "priority_csv": "P0",
+      "priority_bd": "P0",
+      "priority_us": "P0",
+      "priority_global": "P0",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [
+        "EarthSync",
+        "AquaSense",
+        "FutureFields",
+        "RootShift"
+      ],
+      "decision_role": "Daily temperature, precipitation, radiation; seasonal constraints",
+      "native_spatial": "Meteorology 0.5 x 0.625 deg (MERRA-2 based); solar 1 x 1 deg; point API returns the containing cell",
+      "native_temporal": "Daily (also hourly, monthly, climatology); meteorology 1981-present, radiation 1984-present",
+      "latency": "2-7 days depending on provider; recent days revised",
+      "variables": [
+        "T2M",
+        "T2M_MAX",
+        "T2M_MIN",
+        "T2MDEW",
+        "PRECTOTCORR",
+        "ALLSKY_SFC_SW_DWN",
+        "RH2M",
+        "WS2M",
+        "PS"
+      ],
+      "access_method": "Point JSON/CSV API",
+      "auth_required": "none",
+      "live_decision": "live_implemented",
+      "adapter_module": "earthsync.adapters.nasa_power",
+      "numerical_data": true,
+      "critical_caveat": "Meteorological grid; not an in-field weather sensor or a forecast",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://power.larc.nasa.gov/docs/referencing/",
+        "attribution": "NASA Langley Research Center POWER Project",
+        "verified": true,
+        "note": "Read from https://power.larc.nasa.gov/llms.txt during build."
+      },
+      "official_url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "verification": {
+        "doc_checked": true,
+        "doc_pages": [
+          "https://power.larc.nasa.gov/llms.txt",
+          "https://power.larc.nasa.gov/docs/tutorials/service-data-request/api/",
+          "https://power.larc.nasa.gov/docs/release-guide/",
+          "https://power.larc.nasa.gov/docs/services/api/temporal/daily/"
+        ],
+        "live_checked": false,
+        "live_note": "Egress to power.larc.nasa.gov was refused by the build sandbox policy; adapter validated against mock transport only.",
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Request at most 5 concurrent; do not request finer than native; avoid repeated requests for the same cell (official tutorial).",
+        "v10.0.5 (2025-03-04) integrated IMERG v7B into POWER endpoints; exact parameter code unverified here.",
+        "ALLSKY_SFC_SW_DWN unit depends on community (AG: MJ/m2/day, RE: kW-hr/m2/day): adapter reads response metadata."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_SRTM",
+      "name": "SRTM elevation",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "Shuttle Radar Topography Mission (SRTM)",
+      "priority_csv": "P2",
+      "priority_bd": "P2",
+      "priority_us": "P2",
+      "priority_global": "P2",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Near-global land",
+      "modules": [
+        "TerraLens",
+        "SoilBrain"
+      ],
+      "decision_role": "Elevation, slope and broad terrain constraints",
+      "native_spatial": "1 arc-second (~30 m)",
+      "native_temporal": "Static (2000)",
+      "latency": null,
+      "variables": [
+        "elevation"
+      ],
+      "access_method": "Earthdata; USGS",
+      "auth_required": "earthdata_login",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "DEM slope alone is not flood or erosion probability",
+      "license": {
+        "name": "NASA/USGS open data",
+        "url": null,
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://www.earthdata.nasa.gov/data/instruments/srtm",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Terrain slope != flood/erosion probability. Barind is low-relief: elevation differences of metres matter and DEM vertical error is comparable."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_ECOSTRESS",
+      "name": "ECOSTRESS land temperature/ET",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "ECOSTRESS",
+      "priority_csv": "P2",
+      "priority_bd": "P2",
+      "priority_us": "P2",
+      "priority_global": "P2",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "ISS observation swaths",
+      "modules": [
+        "AquaSense",
+        "TerraLens"
+      ],
+      "decision_role": "Thermal stress / ET contextual check",
+      "native_spatial": "~70 m",
+      "native_temporal": "Irregular ISS overpasses",
+      "latency": "Days",
+      "variables": [
+        "LST",
+        "ET (modelled)"
+      ],
+      "access_method": "Earthdata LP DAAC",
+      "auth_required": "earthdata_login",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Irregular coverage; ET modeled; examine quality flags and version 3 formats",
+      "license": {
+        "name": "NASA LP DAAC open data",
+        "url": null,
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://ecostress.jpl.nasa.gov/data",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "USDA_AGCOMMONS",
+      "name": "USDA Ag Data Commons",
+      "kind": "discovery_portal",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "USDA Ag Data Commons",
+      "priority_csv": "P2",
+      "priority_bd": "P3",
+      "priority_us": "P2",
+      "priority_global": "P3",
+      "applicability": {
+        "BD": "limited",
+        "US": "native",
+        "GLOBAL": "limited"
+      },
+      "coverage": "Mainly United States, varies by record",
+      "modules": [
+        "SoilBrain",
+        "validation"
+      ],
+      "decision_role": "Find ground agronomy studies, management experiments",
+      "native_spatial": "Varies",
+      "native_temporal": "Varies",
+      "latency": null,
+      "variables": [],
+      "access_method": "USDA repository",
+      "auth_required": "none",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": false,
+      "critical_caveat": "Discovery portal, not a single consistently structured dataset",
+      "license": {
+        "name": "Per-dataset",
+        "url": "https://data.nal.usda.gov/",
+        "attribution": null,
+        "verified": false,
+        "note": "Each record has its own license."
+      },
+      "official_url": "https://data.nal.usda.gov/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "USDA_WSS",
+      "name": "USDA NRCS Web Soil Survey",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "Web Soil Survey (WSS)",
+      "priority_csv": "P2_US",
+      "priority_bd": "N/A",
+      "priority_us": "P2",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "native",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "USA/territories",
+      "modules": [
+        "SoilBrain",
+        "validation"
+      ],
+      "decision_role": "Mapped soil properties, drainage, holding capacity",
+      "native_spatial": "Mapped polygons",
+      "native_temporal": "Static",
+      "latency": null,
+      "variables": [
+        "soil properties"
+      ],
+      "access_method": "Web Soil Survey",
+      "auth_required": "none",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Do not apply to Bangladesh; mapped survey units not a farmer soil test",
+      "license": {
+        "name": "US Government work (public)",
+        "url": null,
+        "attribution": "USDA NRCS",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://websoilsurvey.nrcs.usda.gov/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "USDA_CDL",
+      "name": "USDA Cropland Data Layer / CropScape",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "Cropland Data Layer (CDL): CropScape",
+      "priority_csv": "P2_US",
+      "priority_bd": "N/A",
+      "priority_us": "P1",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "native",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "USA",
+      "modules": [
+        "RootShift",
+        "TerraLens",
+        "validation"
+      ],
+      "decision_role": "Annual crop history/labels for secondary US test",
+      "native_spatial": "30 m (2008-2023), 10 m (2024+ per catalogue)",
+      "native_temporal": "Annual",
+      "latency": "~months after season",
+      "variables": [
+        "crop type"
+      ],
+      "access_method": "USDA NASS download/viewer",
+      "auth_required": "manual_download",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "10 m since 2024; 30 m 2008-2023; classification uncertainty",
+      "license": {
+        "name": "US Government work (public)",
+        "url": "https://www.nass.usda.gov/Research_and_Science/Cropland/SARS1a.php",
+        "attribution": "USDA NASS",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://www.nass.usda.gov/Research_and_Science/Cropland/SARS1a.php",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "PRISM",
+      "name": "PRISM climate",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "PRISM Climate Data: Oregon State University",
+      "priority_csv": "P2_US",
+      "priority_bd": "N/A",
+      "priority_us": "P1",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "native",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "USA",
+      "modules": [
+        "EarthSync",
+        "validation"
+      ],
+      "decision_role": "Independent regional climate comparisons for US benchmark",
+      "native_spatial": "4 km daily; 800 m normals",
+      "native_temporal": "Daily/monthly/normals",
+      "latency": "~1 day provisional",
+      "variables": [
+        "ppt",
+        "tmin",
+        "tmax",
+        "tdmean"
+      ],
+      "access_method": "PRISM downloads",
+      "auth_required": "manual_download",
+      "live_decision": "offline_extract_ingest",
+      "adapter_module": "earthsync.adapters.reference_csv",
+      "numerical_data": true,
+      "critical_caveat": "Not Bangladesh; gridded model estimates",
+      "license": {
+        "name": "PRISM terms of use",
+        "url": "https://prism.oregonstate.edu/",
+        "attribution": "PRISM Climate Group, Oregon State University",
+        "verified": false,
+        "note": "Confirm terms, esp. bulk redistribution."
+      },
+      "official_url": "https://prism.oregonstate.edu/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Independent gauge-based gridded comparison for the US pilot only. Ingest via declared-column CSV."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "USDA_SSURGO_STATSGO",
+      "name": "SSURGO and STATSGO2",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "USDA NRCS SSURGO/STATSGO2",
+      "priority_csv": "P2_US",
+      "priority_bd": "N/A",
+      "priority_us": "P1",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "native",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "USA/territories",
+      "modules": [
+        "SoilBrain",
+        "validation"
+      ],
+      "decision_role": "Local or regional soil survey values in US case",
+      "native_spatial": "Mapped polygons",
+      "native_temporal": "Static",
+      "latency": null,
+      "variables": [
+        "texture",
+        "OM",
+        "AWC",
+        "drainage",
+        "HSG"
+      ],
+      "access_method": "NRCS Soil Data Access",
+      "auth_required": "none",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Not Bangladesh; mapping and component aggregation limits",
+      "license": {
+        "name": "US Government work (public)",
+        "url": null,
+        "attribution": "USDA NRCS",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://www.nrcs.usda.gov/resources/data-and-reports/soil-survey-geographic-database-ssurgo",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "USDA_NAIP",
+      "name": "NAIP aerial imagery",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "National Agriculture Imagery Program (NAIP)",
+      "priority_csv": "P3",
+      "priority_bd": "N/A",
+      "priority_us": "P3",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "native",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "USA",
+      "modules": [
+        "TerraLens",
+        "validation"
+      ],
+      "decision_role": "High resolution boundary/visual check",
+      "native_spatial": "0.6-1 m",
+      "native_temporal": "~2-3 year cycle per state",
+      "latency": null,
+      "variables": [
+        "aerial imagery"
+      ],
+      "access_method": "USDA imagery downloads",
+      "auth_required": "none",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Imagery not diagnostic ground truth for soil chemistry",
+      "license": {
+        "name": "US Government work (public)",
+        "url": null,
+        "attribution": "USDA FSA",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://naip-usdaonline.hub.arcgis.com/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "USGS_NLCD",
+      "name": "National Land Cover Database",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "USGS National Land Cover Database (NLCD)",
+      "priority_csv": "P3",
+      "priority_bd": "N/A",
+      "priority_us": "P3",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "native",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "USA",
+      "modules": [
+        "TerraLens",
+        "validation"
+      ],
+      "decision_role": "US land-cover changes for optional benchmark",
+      "native_spatial": "30 m",
+      "native_temporal": "Multi-year",
+      "latency": null,
+      "variables": [
+        "land cover"
+      ],
+      "access_method": "USGS MRLC",
+      "auth_required": "none",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Not crop-specific local ground truth",
+      "license": {
+        "name": "US Government work (public)",
+        "url": null,
+        "attribution": "USGS MRLC",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://www.mrlc.gov/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_NLDAS_GLDAS",
+      "name": "NLDAS and GLDAS",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "NLDAS/GLDAS: Land Data Assimilation Systems",
+      "priority_csv": "P2",
+      "priority_bd": "P2",
+      "priority_us": "P2",
+      "priority_global": "P2",
+      "applicability": {
+        "BD": "limited",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "NLDAS North America; GLDAS Global",
+      "modules": [
+        "AquaSense",
+        "validation"
+      ],
+      "decision_role": "Land-surface model soil moisture, hydrological context",
+      "native_spatial": "NLDAS 0.125 deg (CONUS only); GLDAS 0.25 deg global",
+      "native_temporal": "NLDAS hourly; GLDAS 3-hourly",
+      "latency": "Days",
+      "variables": [
+        "soil moisture layers",
+        "ET",
+        "forcing"
+      ],
+      "access_method": "NASA Earthdata",
+      "auth_required": "earthdata_login",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Modeled land-surface variables; NLDAS not available in Bangladesh",
+      "license": {
+        "name": "NASA GES DISC open data",
+        "url": null,
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://ldas.gsfc.nasa.gov/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "NLDAS does not cover Bangladesh: only GLDAS (0.25 deg) applies there."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "FAO_GAEZ",
+      "name": "FAO/IIASA GAEZ v5",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "FAO Global Agro-Ecological Zones (GAEZ)",
+      "priority_csv": "P1",
+      "priority_bd": "P1",
+      "priority_us": "P2",
+      "priority_global": "P1",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [
+        "SoilBrain",
+        "RootShift"
+      ],
+      "decision_role": "Agroecological suitability under specified management",
+      "native_spatial": "~9 km (5 arc-min; confirm v5)",
+      "native_temporal": "Static scenarios/periods",
+      "latency": null,
+      "variables": [
+        "suitability",
+        "yield potential"
+      ],
+      "access_method": "GAEZ v5 portal",
+      "auth_required": "manual_download",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Regional suitability is not specific-field yield or exact crop calendar",
+      "license": {
+        "name": "FAO terms (CC BY-NC-SA / CC BY - confirm)",
+        "url": "https://www.fao.org/gaez/en",
+        "attribution": null,
+        "verified": false,
+        "note": "Non-commercial clause may apply; confirm."
+      },
+      "official_url": "https://www.fao.org/gaez/en",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Owned by Agent 05 (SoilBrain). EarthSync only exposes the registry entry."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "COCORAHS",
+      "name": "CoCoRaHS precipitation observers",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "CoCoRaHS: Community Rain/Snow Observations",
+      "priority_csv": "P3",
+      "priority_bd": "N/A",
+      "priority_us": "P3",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "native",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "North America",
+      "modules": [
+        "EarthSync",
+        "validation"
+      ],
+      "decision_role": "US local rain gauge comparison for IMERG",
+      "native_spatial": "Gauge points (North America)",
+      "native_temporal": "Daily",
+      "latency": "Days",
+      "variables": [
+        "precipitation"
+      ],
+      "access_method": "CoCoRaHS public observations",
+      "auth_required": "none",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Coverage and gauge reporting quality vary; not Bangladesh",
+      "license": {
+        "name": "CoCoRaHS data policy",
+        "url": "https://www.cocorahs.org/",
+        "attribution": null,
+        "verified": false,
+        "note": "Confirm attribution/use terms."
+      },
+      "official_url": "https://www.cocorahs.org/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Ground-gauge reference for IMERG/POWER in the US case; ingest via declared-column CSV."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "USGS_NWIS",
+      "name": "USGS National Water Information System",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "USGS National Water Information Systems (NWIS)",
+      "priority_csv": "P3",
+      "priority_bd": "N/A",
+      "priority_us": "P3",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "native",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "USA",
+      "modules": [
+        "AquaSense",
+        "validation"
+      ],
+      "decision_role": "Groundwater/streamflow/water-quality observations for US check",
+      "native_spatial": "Station points",
+      "native_temporal": "Instantaneous-annual",
+      "latency": "Near real-time",
+      "variables": [
+        "groundwater level",
+        "streamflow"
+      ],
+      "access_method": "USGS NWIS",
+      "auth_required": "none",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Site-specific stations and dates; not Bangladesh groundwater measurements",
+      "license": {
+        "name": "US Government work (public)",
+        "url": null,
+        "attribution": "USGS",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://waterdata.usgs.gov/nwis",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "USDA_AMS",
+      "name": "USDA AMS Market News",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "USDA AMS Market News",
+      "priority_csv": "P2_US",
+      "priority_bd": "N/A",
+      "priority_us": "P2",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "native",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "USA markets",
+      "modules": [
+        "AgriEconomics"
+      ],
+      "decision_role": "Commodity market reference prices for US case",
+      "native_spatial": "Market",
+      "native_temporal": "Daily/weekly",
+      "latency": null,
+      "variables": [
+        "price"
+      ],
+      "access_method": "USDA AMS",
+      "auth_required": "registration",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Markets/grades differ; cannot stand in for Bangladesh prices",
+      "license": {
+        "name": "USDA AMS terms",
+        "url": null,
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://www.ams.usda.gov/market-news",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "USDA_QUICKSTATS",
+      "name": "USDA NASS QuickStats",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "USDA NASS QuickStats",
+      "priority_csv": "P2_US",
+      "priority_bd": "N/A",
+      "priority_us": "P1",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "native",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "USA",
+      "modules": [
+        "RootShift",
+        "AgriEconomics",
+        "validation"
+      ],
+      "decision_role": "Historical yields and area as coarse benchmarking",
+      "native_spatial": "County/state",
+      "native_temporal": "Annual",
+      "latency": null,
+      "variables": [
+        "yield",
+        "area"
+      ],
+      "access_method": "NASS API / downloads",
+      "auth_required": "api_key",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "County aggregates cannot establish specific field production",
+      "license": {
+        "name": "USDA NASS terms",
+        "url": null,
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://quickstats.nass.usda.gov/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "OPENET",
+      "name": "OpenET evapotranspiration",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "OpenET: Evapotranspiration for Water Management",
+      "priority_csv": "P2_US",
+      "priority_bd": "N/A",
+      "priority_us": "P2",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "limited",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "Western USA",
+      "modules": [
+        "AquaSense",
+        "validation"
+      ],
+      "decision_role": "Modeled ET estimates for US secondary checks",
+      "native_spatial": "30 m field-scale",
+      "native_temporal": "Monthly/daily",
+      "latency": "Days-weeks",
+      "variables": [
+        "ET"
+      ],
+      "access_method": "OpenET",
+      "auth_required": "api_key",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Not direct ground truth; model-based ET and regional coverage",
+      "license": {
+        "name": "OpenET terms",
+        "url": "https://etdata.org/",
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://etdata.org/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Coverage is the western US: Iowa is outside the covered area, so OpenET is NOT applicable to the Story County pilot. Confirm coverage map."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "LANDFIRE",
+      "name": "USFS LANDFIRE",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "USFS LANDFIRE: Vegetation & Fuel Layers",
+      "priority_csv": "P3",
+      "priority_bd": "N/A",
+      "priority_us": "P3",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "not_applicable",
+        "US": "native",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "USA",
+      "modules": [
+        "TerraLens",
+        "TerraRestore"
+      ],
+      "decision_role": "Vegetation, fuels and surroundings",
+      "native_spatial": "30 m",
+      "native_temporal": "Periodic",
+      "latency": null,
+      "variables": [
+        "vegetation",
+        "fuel"
+      ],
+      "access_method": "LANDFIRE downloads",
+      "auth_required": "none",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Peripheral to short-cycle crop rotations",
+      "license": {
+        "name": "US Government work (public)",
+        "url": null,
+        "attribution": "USFS/USGS",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://www.landfire.gov/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_GEDI",
+      "name": "GEDI vegetation structure",
+      "kind": "dataset",
+      "origin_group": "NASA challenge",
+      "organizer_listed": true,
+      "organizer_name": "Global Ecosystem Dynamics Investigation (GEDI)",
+      "priority_csv": "P3",
+      "priority_bd": "P3",
+      "priority_us": "P3",
+      "priority_global": "P3",
+      "applicability": {
+        "BD": "limited",
+        "US": "limited",
+        "GLOBAL": "limited"
+      },
+      "coverage": "ISS-covered global land",
+      "modules": [
+        "TerraLens",
+        "TerraRestore"
+      ],
+      "decision_role": "Surrounding tall vegetation and tree canopy structure",
+      "native_spatial": "25 m footprints, sparse tracks",
+      "native_temporal": "2019-2023 mission segments",
+      "latency": null,
+      "variables": [
+        "canopy height",
+        "biomass"
+      ],
+      "access_method": "Earthdata",
+      "auth_required": "earthdata_login",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Not a direct short-crop biomass or rotation measurement",
+      "license": {
+        "name": "NASA open data",
+        "url": null,
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://gedi.umd.edu/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "ESA_SENTINEL2",
+      "name": "ESA Sentinel-2",
+      "kind": "dataset",
+      "origin_group": "Space-agency partner",
+      "organizer_listed": true,
+      "organizer_name": "Copernicus Sentinel-2: ESA",
+      "priority_csv": "P1",
+      "priority_bd": "P1",
+      "priority_us": "P1",
+      "priority_global": "P1",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [
+        "TerraLens",
+        "FieldTwin"
+      ],
+      "decision_role": "10–20 m spectral vegetation context; via NASA HLS",
+      "native_spatial": "10-20 m bands (60 m atmospheric)",
+      "native_temporal": "~5-day revisit (2 satellites)",
+      "latency": "Days",
+      "variables": [
+        "B04",
+        "B08",
+        "B8A",
+        "SCL"
+      ],
+      "access_method": "Copernicus Data Space / NASA HLS",
+      "auth_required": "registration",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Use cloud mask and acquisition dates; avoid treating resampling as new evidence",
+      "license": {
+        "name": "Copernicus Sentinel data terms",
+        "url": "https://sentinels.copernicus.eu/",
+        "attribution": "Contains modified Copernicus Sentinel data",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://dataspace.copernicus.eu/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Reach Sentinel-2 via NASA HLS to avoid duplicate harmonisation; HLS resamples S2 to 30 m: not new evidence."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "ECMWF_ERA5",
+      "name": "ECMWF ERA5 atmospheric reanalysis",
+      "kind": "dataset",
+      "origin_group": "Space-agency partner",
+      "organizer_listed": true,
+      "organizer_name": "ERA5: ECMWF Reanalysis",
+      "priority_csv": "P2",
+      "priority_bd": "P2",
+      "priority_us": "P2",
+      "priority_global": "P1",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [
+        "EarthSync",
+        "AquaSense",
+        "validation"
+      ],
+      "decision_role": "Hourly climate context and comparison, not independent station truth",
+      "native_spatial": "0.25 deg",
+      "native_temporal": "Hourly, 1940-present",
+      "latency": "~5 days (ERA5T)",
+      "variables": [
+        "2m temp",
+        "precip",
+        "radiation",
+        "soil temp/moisture"
+      ],
+      "access_method": "Copernicus CDS",
+      "auth_required": "registration",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Reanalysis incorporates observations; 0.25-degree grid is not a field sensor",
+      "license": {
+        "name": "Copernicus licence",
+        "url": "https://cds.climate.copernicus.eu/",
+        "attribution": "Contains modified Copernicus Climate Change Service information",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://cds.climate.copernicus.eu/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Not independent of POWER: both rest on reanalysis assimilation. Use as a second *model* view, not ground truth."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_HLS",
+      "name": "NASA HLS v2 / HLS vegetation indices",
+      "kind": "dataset",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P1",
+      "priority_bd": "P1",
+      "priority_us": "P1",
+      "priority_global": "P1",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [
+        "TerraLens",
+        "FieldTwin"
+      ],
+      "decision_role": "Cloud-masked 30 m vegetation time series",
+      "native_spatial": "30 m (HLSL30 from Landsat 8/9, HLSS30 from Sentinel-2 resampled to 30 m)",
+      "native_temporal": "2-3 day combined revisit (cloud permitting)",
+      "latency": "~1.7 days nominal",
+      "variables": [
+        "B04 red",
+        "B05/B8A NIR",
+        "Fmask"
+      ],
+      "access_method": "Earthdata LP DAAC",
+      "auth_required": "earthdata_login",
+      "live_decision": "offline_extract_ingest",
+      "adapter_module": "earthsync.adapters.hls",
+      "numerical_data": true,
+      "critical_caveat": "Observed scenes delayed; NDVI time series can be cloudy; imagery may not identify crop type",
+      "license": {
+        "name": "NASA/LP DAAC open data",
+        "url": "https://lpdaac.usgs.gov/products/hlsl30v002/",
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://hls.gsfc.nasa.gov/data-access-and-tools/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Implemented: NDVI computation, reflectance scale factor, Fmask decoding, cloud-free gating. NDVI != yield/nutrients/disease."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_POWER_PROJ",
+      "name": "NASA POWER climate projections NEX-GDDP-CMIP6",
+      "kind": "dataset",
+      "origin_group": "New verified addition",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P1_STRETCH",
+      "priority_bd": "P1_STRETCH",
+      "priority_us": "P1_STRETCH",
+      "priority_global": "P1_STRETCH",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [
+        "FutureFields"
+      ],
+      "decision_role": "Actual climate scenario ensemble inputs for future time horizons",
+      "native_spatial": "0.25 deg (NEX-GDDP-CMIP6)",
+      "native_temporal": "Daily, 2015-2100 scenarios (SSP)",
+      "latency": null,
+      "variables": [
+        "T2M",
+        "PRECTOTCORR (projection)"
+      ],
+      "access_method": "NASA POWER projection API",
+      "auth_required": "none",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "2015-2100 0.25-degree; SSP pathways not next-week weather forecasts",
+      "license": {
+        "name": "See POWER referencing page",
+        "url": "https://power.larc.nasa.gov/docs/referencing/",
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://power.larc.nasa.gov/docs/services/api/projection/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Scenario ensemble, not weather forecast: any use must be labelled hypothetical_scenario/forecast-class. FutureFields owns use."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "ISRIC_SOILGRIDS",
+      "name": "ISRIC SoilGrids global modeled soils",
+      "kind": "dataset",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P1",
+      "priority_bd": "P1",
+      "priority_us": "P3",
+      "priority_global": "P2",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [
+        "SoilBrain",
+        "FieldTwin"
+      ],
+      "decision_role": "Baseline soil texture, pH, organic carbon with uncertainty",
+      "native_spatial": "250 m",
+      "native_temporal": "Static",
+      "latency": null,
+      "variables": [
+        "sand/silt/clay",
+        "pH",
+        "organic carbon"
+      ],
+      "access_method": "WebDAV; WCS; downloaded subset",
+      "auth_required": "none",
+      "live_decision": "do_not_use_live",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "REST API paused; estimates not measured field chemistry; soil salinity requires local source",
+      "license": {
+        "name": "CC BY 4.0",
+        "url": "https://docs.isric.org/globaldata/soilgrids/",
+        "attribution": "ISRIC - World Soil Information",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://docs.isric.org/globaldata/soilgrids/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "note": "REST API reported paused by organizer catalogue; not verified here.",
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Do not depend on REST. Use a pre-extracted WCS/WebDAV subset supplied by Agent 05. Modelled, not measured; no salinity."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "FAO_CROP_CAL",
+      "name": "FAO Crop Calendar",
+      "kind": "dataset",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P0",
+      "priority_bd": "P0",
+      "priority_us": "P2",
+      "priority_global": "P1",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Multi-country variable coverage",
+      "modules": [
+        "SoilBrain",
+        "RootShift"
+      ],
+      "decision_role": "Crop planting and harvesting references",
+      "native_spatial": "Admin-level / agro-ecological zone",
+      "native_temporal": "Annual calendar",
+      "latency": null,
+      "variables": [
+        "planting/harvest windows"
+      ],
+      "access_method": "FAO crop calendar portal",
+      "auth_required": "manual_download",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Coverage not guaranteed for chosen country/crop; local evidence needed",
+      "license": {
+        "name": "FAO terms",
+        "url": "https://cropcalendar.apps.fao.org/",
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://cropcalendar.apps.fao.org/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Owned by Agent 05 (SoilBrain)."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "FAO_56",
+      "name": "FAO-56 Crop Evapotranspiration",
+      "kind": "methodology",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P0",
+      "priority_bd": "P0",
+      "priority_us": "P0",
+      "priority_global": "P0",
+      "applicability": {
+        "BD": "methodology_only",
+        "US": "methodology_only",
+        "GLOBAL": "methodology_only"
+      },
+      "coverage": "Methodology global",
+      "modules": [
+        "AquaSense",
+        "SoilBrain"
+      ],
+      "decision_role": "ET0, Kc, soil-water balance method and assumptions",
+      "native_spatial": "n/a",
+      "native_temporal": "n/a",
+      "latency": null,
+      "variables": [
+        "ET0 method"
+      ],
+      "access_method": "FAO publication",
+      "auth_required": "none",
+      "live_decision": "methodology_reference",
+      "adapter_module": "earthsync.et0",
+      "numerical_data": false,
+      "critical_caveat": "Use appropriate paddy vs upland physics; not a live ET dataset",
+      "license": {
+        "name": "FAO publication",
+        "url": "https://www.fao.org/4/x0490e/x0490e00.htm",
+        "attribution": "Allen et al. (1998) FAO Irrigation and Drainage Paper 56",
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://www.fao.org/4/x0490e/x0490e00.htm",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "note": "Formulae implemented and tested against FAO-56 worked examples (see tests/test_et0.py).",
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "EarthSync supplies ET0 as a forcing feature only; AquaSense owns Kc, paddy vs upland water balance."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "FAO_AQUACROP",
+      "name": "FAO AquaCrop",
+      "kind": "methodology",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P2",
+      "priority_bd": "P2",
+      "priority_us": "P2",
+      "priority_global": "P2",
+      "applicability": {
+        "BD": "methodology_only",
+        "US": "methodology_only",
+        "GLOBAL": "methodology_only"
+      },
+      "coverage": "Methodology global",
+      "modules": [
+        "AquaSense",
+        "FutureFields"
+      ],
+      "decision_role": "Water-limited crop response simulation",
+      "native_spatial": "n/a",
+      "native_temporal": "n/a",
+      "latency": null,
+      "variables": [],
+      "access_method": "FAO software/Python",
+      "auth_required": "none",
+      "live_decision": "methodology_reference",
+      "adapter_module": null,
+      "numerical_data": false,
+      "critical_caveat": "Needs crop calibration; not turnkey or required for MVP",
+      "license": {
+        "name": "FAO software terms",
+        "url": "https://www.fao.org/aquacrop/en",
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://www.fao.org/aquacrop/en",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "BARC_KHAMARI",
+      "name": "BARC Khamari and Bangladesh crop zoning",
+      "kind": "dataset",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P0",
+      "priority_bd": "P0",
+      "priority_us": "N/A",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "native",
+        "US": "not_applicable",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "Bangladesh",
+      "modules": [
+        "SoilBrain",
+        "validation"
+      ],
+      "decision_role": "Regional soil/crop suitability and constraints",
+      "native_spatial": "Upazila / soil series",
+      "native_temporal": "Static",
+      "latency": null,
+      "variables": [
+        "land suitability",
+        "soil series"
+      ],
+      "access_method": "Bangladesh BARC portal",
+      "auth_required": "manual_download",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Use published sources or authorized exports; no presumed public API",
+      "license": {
+        "name": "Unknown - published sources only",
+        "url": "https://cropzoning.gov.bd/",
+        "attribution": null,
+        "verified": false,
+        "note": "No presumed public API; use published or authorized exports."
+      },
+      "official_url": "https://cropzoning.gov.bd/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Owned by Agent 05."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "LOCAL_CROP_STUDY",
+      "name": "Local Bangladesh crop calendars and agronomic papers",
+      "kind": "dataset",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P0",
+      "priority_bd": "P0",
+      "priority_us": "N/A",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "native",
+        "US": "not_applicable",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "Bangladesh pilot region",
+      "modules": [
+        "SoilBrain",
+        "RootShift"
+      ],
+      "decision_role": "Evidence for rice-fallow/rice-rice/rice-mungbean and constraints",
+      "native_spatial": "Pilot region",
+      "native_temporal": "Study-dependent",
+      "latency": null,
+      "variables": [],
+      "access_method": "Documented studies / expert input",
+      "auth_required": "manual_download",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Coefficients and yield assumptions must be traceable to actual sources",
+      "license": {
+        "name": "Per-paper",
+        "url": null,
+        "attribution": null,
+        "verified": false,
+        "note": "Each paper has its own terms."
+      },
+      "official_url": "https://www.fao.org/gaez/en",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Owned by Agent 05. The CSV official_url points at GAEZ and is not a study link."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "LOCAL_MARKETS",
+      "name": "Bangladesh Dept Agricultural Marketing",
+      "kind": "dataset",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P1",
+      "priority_bd": "P1",
+      "priority_us": "N/A",
+      "priority_global": "N/A",
+      "applicability": {
+        "BD": "native",
+        "US": "not_applicable",
+        "GLOBAL": "not_applicable"
+      },
+      "coverage": "Bangladesh",
+      "modules": [
+        "AgriEconomics"
+      ],
+      "decision_role": "Dated local crop price observations/reference",
+      "native_spatial": "Market",
+      "native_temporal": "Dated price observations",
+      "latency": null,
+      "variables": [
+        "price"
+      ],
+      "access_method": "Government market portal",
+      "auth_required": "unknown",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Wholesale and retail prices differ; dated source, avoid invented live data",
+      "license": {
+        "name": "Unknown",
+        "url": "https://market.dam.gov.bd/",
+        "attribution": null,
+        "verified": false,
+        "note": "Terms unknown; do not scrape."
+      },
+      "official_url": "https://market.dam.gov.bd/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Owned by AgriEconomics agent."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_GRACE",
+      "name": "NASA GRACE / GRACE-FO",
+      "kind": "dataset",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P3",
+      "priority_bd": "P3",
+      "priority_us": "P3",
+      "priority_global": "P3",
+      "applicability": {
+        "BD": "limited",
+        "US": "limited",
+        "GLOBAL": "limited"
+      },
+      "coverage": "Global coarse resolution",
+      "modules": [
+        "Future AquaSense"
+      ],
+      "decision_role": "Regional terrestrial water storage trends",
+      "native_spatial": "~300 km effective",
+      "native_temporal": "Monthly",
+      "latency": "Months",
+      "variables": [
+        "terrestrial water storage anomaly"
+      ],
+      "access_method": "NASA GRACE portal",
+      "auth_required": "earthdata_login",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Not field-level groundwater depth or water quality",
+      "license": {
+        "name": "NASA open data",
+        "url": null,
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://grace.jpl.nasa.gov/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Cannot test individual wells; region-scale storage trend only."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_NASADEM",
+      "name": "NASADEM elevation",
+      "kind": "dataset",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P2",
+      "priority_bd": "P2",
+      "priority_us": "P2",
+      "priority_global": "P2",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Near-global",
+      "modules": [
+        "TerraLens",
+        "SoilBrain"
+      ],
+      "decision_role": "Topographic/slope context and elevation",
+      "native_spatial": "1 arc-second (~30 m)",
+      "native_temporal": "Static",
+      "latency": null,
+      "variables": [
+        "elevation"
+      ],
+      "access_method": "NASA LP DAAC",
+      "auth_required": "earthdata_login",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Avoid interpreting terrain alone as local flood maps",
+      "license": {
+        "name": "NASA LP DAAC open data",
+        "url": null,
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://lpdaac.usgs.gov/products/nasadem_hgtv001/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NVIDIA_EARTH2",
+      "name": "NVIDIA Earth2Studio / Earth-2 models",
+      "kind": "model_checkpoint",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P3",
+      "priority_bd": "P3",
+      "priority_us": "P3",
+      "priority_global": "P3",
+      "applicability": {
+        "BD": "limited",
+        "US": "limited",
+        "GLOBAL": "limited"
+      },
+      "coverage": "Global model dependent",
+      "modules": [
+        "FutureFields",
+        "Research"
+      ],
+      "decision_role": "AI weather modeling option, models not agronomic data",
+      "native_spatial": "Model-dependent",
+      "native_temporal": "Model-dependent",
+      "latency": null,
+      "variables": [],
+      "access_method": "GitHub library; model-specific downloads",
+      "auth_required": "none",
+      "live_decision": "do_not_use_live",
+      "adapter_module": null,
+      "numerical_data": false,
+      "critical_caveat": "GPU/compute/cost; individual model/data license; not NASA observation",
+      "license": {
+        "name": "Apache-2.0 code; model weights vary",
+        "url": "https://github.com/NVIDIA/earth2studio",
+        "attribution": null,
+        "verified": false,
+        "note": "Check each checkpoint's license."
+      },
+      "official_url": "https://github.com/NVIDIA/earth2studio",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Research path only. Not NASA observations; no dependency in this module."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "IBM_PRITHVI",
+      "name": "IBM-NASA Prithvi EO foundation model",
+      "kind": "model_checkpoint",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P3",
+      "priority_bd": "P3",
+      "priority_us": "P3",
+      "priority_global": "P3",
+      "applicability": {
+        "BD": "limited",
+        "US": "limited",
+        "GLOBAL": "limited"
+      },
+      "coverage": "Depends on pretrained checkpoint",
+      "modules": [
+        "TerraLens",
+        "Research"
+      ],
+      "decision_role": "Potential Earth imagery representations and classifications",
+      "native_spatial": "30 m (HLS-based)",
+      "native_temporal": "Model-dependent",
+      "latency": null,
+      "variables": [],
+      "access_method": "Hugging Face / GitHub",
+      "auth_required": "none",
+      "live_decision": "do_not_use_live",
+      "adapter_module": null,
+      "numerical_data": false,
+      "critical_caveat": "Checkpoint not automatically crop classifier; evaluate specific task and license",
+      "license": {
+        "name": "Check Hugging Face model card",
+        "url": "https://huggingface.co/ibm-nasa-geospatial",
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://huggingface.co/ibm-nasa-geospatial",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Research path only. Not a crop classifier without task-specific fine-tuning and validation."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "KAGGLE_EXTERNAL",
+      "name": "Kaggle datasets (case-specific)",
+      "kind": "dataset",
+      "origin_group": "Previously researched",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P3",
+      "priority_bd": "P3",
+      "priority_us": "P3",
+      "priority_global": "P3",
+      "applicability": {
+        "BD": "limited",
+        "US": "limited",
+        "GLOBAL": "limited"
+      },
+      "coverage": "Varies",
+      "modules": [
+        "Research"
+      ],
+      "decision_role": "Optional prototype ML training references",
+      "native_spatial": "Varies",
+      "native_temporal": "Varies",
+      "latency": null,
+      "variables": [],
+      "access_method": "Kaggle",
+      "auth_required": "registration",
+      "live_decision": "do_not_use_live",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Provenance/license/geographic representativeness may be weak",
+      "license": {
+        "name": "Per-dataset",
+        "url": "https://www.kaggle.com/datasets",
+        "attribution": null,
+        "verified": false,
+        "note": "Provenance often weak."
+      },
+      "official_url": "https://www.kaggle.com/datasets",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": []
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "FARMER_GROUND",
+      "name": "Farmer observations and local field tests",
+      "kind": "user_input",
+      "origin_group": "Core non-satellite input",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "P0",
+      "priority_bd": "P0",
+      "priority_us": "P0",
+      "priority_global": "P0",
+      "applicability": {
+        "BD": "user_supplied",
+        "US": "user_supplied",
+        "GLOBAL": "user_supplied"
+      },
+      "coverage": "Specific farm",
+      "modules": [
+        "FieldTwin",
+        "SoilBrain",
+        "AquaSense"
+      ],
+      "decision_role": "Irrigation, soil test, salinity, cost, observed crop timing",
+      "native_spatial": "Specific farm",
+      "native_temporal": "Event-dated",
+      "latency": null,
+      "variables": [
+        "irrigation",
+        "soil test",
+        "salinity",
+        "cost",
+        "crop timing"
+      ],
+      "access_method": "Manual user entry / approved partner",
+      "auth_required": "manual_download",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Must distinguish user reports from verified measurements",
+      "license": {
+        "name": "Farmer-owned",
+        "url": null,
+        "attribution": null,
+        "verified": true,
+        "note": "User data; consent required."
+      },
+      "official_url": "",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "SOURCES_RELEVANT.csv + organizer list + curated overlay"
+      },
+      "notes": [
+        "Owned by AquaSense/FieldTwin. EarthSync never mixes farmer-reported values into NASA series; data_type=farmer_reported."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_POWER_IMERG_PARAM",
+      "name": "IMERG via POWER endpoint (parameter unverified)",
+      "kind": "access_service",
+      "origin_group": "New verified addition",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "added",
+      "priority_bd": "P1",
+      "priority_us": "P1",
+      "priority_global": "P1",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "",
+      "modules": [],
+      "decision_role": "Parameter code, units and day boundary must be read from the response before use.",
+      "native_spatial": "0.1 deg (IMERG) delivered through POWER point API",
+      "native_temporal": "Daily",
+      "latency": "POWER-dependent",
+      "variables": [
+        "IMERG-derived precipitation"
+      ],
+      "access_method": "See official URL",
+      "auth_required": "none",
+      "live_decision": "live_designed_untested",
+      "adapter_module": "earthsync.adapters.nasa_power",
+      "numerical_data": true,
+      "critical_caveat": "Parameter code, units and day boundary must be read from the response before use.",
+      "license": {
+        "name": "CC BY 4.0 (POWER) / NASA open data (IMERG)",
+        "url": "https://power.larc.nasa.gov/docs/referencing/",
+        "attribution": null,
+        "verified": false,
+        "note": "POWER part verified; IMERG attribution to confirm."
+      },
+      "official_url": "https://power.larc.nasa.gov/docs/referencing/",
+      "verification": {
+        "doc_checked": true,
+        "doc_pages": [
+          "https://power.larc.nasa.gov/docs/release-guide/"
+        ],
+        "live_checked": false,
+        "live_note": "Release guide states IMERG v7B integrated 2025-03-04; parameter code IMERG_PRECTOT is a candidate only. 422 => typed parameter_rejected.",
+        "built_from": "curated overlay (not in supplied CSV)"
+      },
+      "notes": [
+        "Cheapest route to a POWER-vs-IMERG cross-check without Earthdata credentials."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_GIOVANNI",
+      "name": "NASA Giovanni (time-series/maps portal)",
+      "kind": "access_service",
+      "origin_group": "Organizer-mentioned access path",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "added",
+      "priority_bd": "P2",
+      "priority_us": "P2",
+      "priority_global": "P2",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [],
+      "decision_role": "Interactive tool; exported time series are valid inputs only via the declared-metadata extract ingest.",
+      "native_spatial": "Product-dependent",
+      "native_temporal": "Product-dependent",
+      "latency": null,
+      "variables": [],
+      "access_method": "See official URL",
+      "auth_required": "earthdata_login",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Interactive tool; exported time series are valid inputs only via the declared-metadata extract ingest.",
+      "license": {
+        "name": "Per product",
+        "url": "https://giovanni.gsfc.nasa.gov/giovanni/",
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://giovanni.gsfc.nasa.gov/giovanni/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "curated overlay (not in supplied CSV)"
+      },
+      "notes": [
+        "Use for a one-off IMERG/SMAP point time series export; record product, version, area-averaging and units."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_APPEEARS",
+      "name": "NASA AppEEARS (point/area sampler)",
+      "kind": "access_service",
+      "origin_group": "Access path",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "added",
+      "priority_bd": "P2",
+      "priority_us": "P2",
+      "priority_global": "P2",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [],
+      "decision_role": "Requires Earthdata login and asynchronous task polling; designed for the HLS/SMAP point-sampling route, not implemented here.",
+      "native_spatial": "Product-dependent",
+      "native_temporal": "Product-dependent",
+      "latency": null,
+      "variables": [],
+      "access_method": "See official URL",
+      "auth_required": "earthdata_login",
+      "live_decision": "manifest_only",
+      "adapter_module": null,
+      "numerical_data": true,
+      "critical_caveat": "Requires Earthdata login and asynchronous task polling; designed for the HLS/SMAP point-sampling route, not implemented here.",
+      "license": {
+        "name": "Per product",
+        "url": "https://appeears.earthdatacloud.nasa.gov/",
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://appeears.earthdatacloud.nasa.gov/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "curated overlay (not in supplied CSV)"
+      },
+      "notes": [
+        "Best candidate for authenticated HLS/SMAP point extraction without downloading rasters."
+      ]
+    },
+    {
+      "schema_version": "1.0.0",
+      "source_id": "NASA_WORLDVIEW",
+      "name": "NASA Worldview (imagery browser)",
+      "kind": "visual_only",
+      "origin_group": "Organizer-mentioned",
+      "organizer_listed": false,
+      "organizer_name": null,
+      "priority_csv": "added",
+      "priority_bd": "P3",
+      "priority_us": "P3",
+      "priority_global": "P3",
+      "applicability": {
+        "BD": "native",
+        "US": "native",
+        "GLOBAL": "native"
+      },
+      "coverage": "Global",
+      "modules": [],
+      "decision_role": "Colour-mapped display imagery is NOT numerical rainfall/vegetation data. Never read values off Worldview pixels.",
+      "native_spatial": "Display tiles",
+      "native_temporal": "Daily imagery",
+      "latency": "Hours",
+      "variables": [],
+      "access_method": "See official URL",
+      "auth_required": "none",
+      "live_decision": "do_not_use_live",
+      "adapter_module": null,
+      "numerical_data": false,
+      "critical_caveat": "Colour-mapped display imagery is NOT numerical rainfall/vegetation data. Never read values off Worldview pixels.",
+      "license": {
+        "name": "NASA open imagery",
+        "url": "https://worldview.earthdata.nasa.gov/",
+        "attribution": null,
+        "verified": false,
+        "note": "License text not read during this build; confirm at the provider before redistribution."
+      },
+      "official_url": "https://worldview.earthdata.nasa.gov/",
+      "verification": {
+        "doc_checked": false,
+        "live_checked": false,
+        "built_from": "curated overlay (not in supplied CSV)"
+      },
+      "notes": [
+        "Organizer note: IMERG layers can be downloaded as images - those are pictures, not measurements."
+      ]
+    }
+  ]
+}

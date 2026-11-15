@@ -1,0 +1,185 @@
+{
+  "run_utc": "2026-11-15T10:16:32Z",
+  "requests": [
+    {
+      "pilot_id": "BD_RAJSHAHI_BARIND",
+      "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,T2M_MAX,T2M_MIN,T2MDEW,PRECTOTCORR,ALLSKY_SFC_SW_DWN,RH2M,WS2M,PS&community=AG&longitude=88.6042&latitude=24.3745&start=19910101&end=20251231&format=JSON",
+      "status": "ok",
+      "verification": {
+        "variables": {
+          "T2M": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 9.67,
+            "max": 37.75,
+            "unit": "degC"
+          },
+          "T2M_MAX": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 16.66,
+            "max": 46.42,
+            "unit": "degC"
+          },
+          "T2M_MIN": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 2.32,
+            "max": 30.69,
+            "unit": "degC"
+          },
+          "T2MDEW": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": -11.94,
+            "max": 27.91,
+            "unit": "degC"
+          },
+          "PRECTOTCORR": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 0.0,
+            "max": 98.09,
+            "unit": "mm/day"
+          },
+          "ALLSKY_SFC_SW_DWN": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 1.88,
+            "max": 28.79,
+            "unit": "MJ/m2/day"
+          },
+          "RH2M": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 7.42,
+            "max": 95.51,
+            "unit": "%"
+          },
+          "WS2M": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 0.33,
+            "max": 9.06,
+            "unit": "m/s"
+          },
+          "PS": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 98.78,
+            "max": 101.9,
+            "unit": "kPa"
+          }
+        },
+        "ok": true,
+        "warnings": []
+      },
+      "fixture": "C:\\ORBITILL\\orbitill-platform\\data\\nasa-power\\POWER_BD_RAJSHAHI_BARIND_REAL.json.gz"
+    },
+    {
+      "check": "cell_invariance",
+      "pilot_id": "BD_RAJSHAHI_BARIND",
+      "same_cells": true,
+      "identical_values": true
+    },
+    {
+      "pilot_id": "US_IOWA_STORY",
+      "url": "https://power.larc.nasa.gov/api/temporal/daily/point?parameters=T2M,T2M_MAX,T2M_MIN,T2MDEW,PRECTOTCORR,ALLSKY_SFC_SW_DWN,RH2M,WS2M,PS&community=AG&longitude=-93.6319&latitude=42.0308&start=19910101&end=20251231&format=JSON",
+      "status": "ok",
+      "verification": {
+        "variables": {
+          "T2M": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": -31.09,
+            "max": 33.64,
+            "unit": "degC"
+          },
+          "T2M_MAX": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": -23.29,
+            "max": 42.12,
+            "unit": "degC"
+          },
+          "T2M_MIN": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": -38.23,
+            "max": 26.52,
+            "unit": "degC"
+          },
+          "T2MDEW": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": -31.95,
+            "max": 26.2,
+            "unit": "degC"
+          },
+          "PRECTOTCORR": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 0.0,
+            "max": 73.46,
+            "unit": "mm/day"
+          },
+          "ALLSKY_SFC_SW_DWN": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 0.47,
+            "max": 32.38,
+            "unit": "MJ/m2/day"
+          },
+          "RH2M": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 31.47,
+            "max": 99.68,
+            "unit": "%"
+          },
+          "WS2M": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 0.52,
+            "max": 11.2,
+            "unit": "m/s"
+          },
+          "PS": {
+            "days": 12784,
+            "valid": 12784,
+            "valid_fraction": 1.0,
+            "min": 95.01,
+            "max": 100.62,
+            "unit": "kPa"
+          }
+        },
+        "ok": true,
+        "warnings": []
+      },
+      "fixture": "C:\\ORBITILL\\orbitill-platform\\data\\nasa-power\\POWER_US_IOWA_STORY_REAL.json.gz"
+    },
+    {
+      "check": "cell_invariance",
+      "pilot_id": "US_IOWA_STORY",
+      "same_cells": true,
+      "identical_values": true
+    }
+  ]
+}

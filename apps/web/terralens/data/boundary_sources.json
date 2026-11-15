@@ -1,0 +1,98 @@
+{
+  "retrieved_at_utc": "2026-11-15T13:24:33Z",
+  "tool": "scripts/fetch_boundaries.py",
+  "release_pin": {
+    "geoBoundaries": "9469f09",
+    "natural_earth": "5.1.2 (master 2026-11)"
+  },
+  "files": [
+    {
+      "id": "geoboundaries-BGD-ADM0",
+      "file": "geoBoundaries-BGD-ADM0_simplified.geojson",
+      "license": "CC0 1.0 Universal",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "attribution": "geoBoundaries / Wikimedia Commons (BGD ADM0)",
+      "boundary_version": "BGD-ADM0-71232402 (2015)",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BGD/ADM0/geoBoundaries-BGD-ADM0_simplified.geojson",
+      "bytes": 57643,
+      "sha256": "4cfafa6d5250a0aadeefb8737f11604ad1b9b9904585461fee2a5ece4a61a219"
+    },
+    {
+      "id": "geoboundaries-BGD-ADM1",
+      "file": "geoBoundaries-BGD-ADM1_simplified.geojson",
+      "license": "CC0 1.0 Universal",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "attribution": "geoBoundaries / Wikimedia Commons (BGD ADM1)",
+      "boundary_version": "BGD-ADM1-32408957 (2015)",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BGD/ADM1/geoBoundaries-BGD-ADM1_simplified.geojson",
+      "bytes": 92247,
+      "sha256": "bb91b74c7a7d8a690122b916f5e2f99606d2ce2f18ff938f49d80f15b4ba6aea"
+    },
+    {
+      "id": "geoboundaries-BGD-ADM2",
+      "file": "geoBoundaries-BGD-ADM2_simplified.geojson",
+      "license": "CC BY 3.0 IGO",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/igo/",
+      "attribution": "Bangladesh Bureau of Statistics (BBS) and OCHA ROAP, via geoBoundaries",
+      "boundary_version": "BGD-ADM2-16705992 (2020)",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BGD/ADM2/geoBoundaries-BGD-ADM2_simplified.geojson",
+      "bytes": 1686112,
+      "sha256": "7dbdb186f3b8af10417147a99859196fcd89c619fb5c6ac3804251fb6b449b6a"
+    },
+    {
+      "id": "geoboundaries-BGD-ADM3",
+      "file": "geoBoundaries-BGD-ADM3_simplified.geojson",
+      "license": "CC BY 3.0 IGO",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/igo/",
+      "attribution": "Bangladesh Bureau of Statistics (BBS) and OCHA ROAP, via geoBoundaries",
+      "boundary_version": "BGD-ADM3-5055444 (2020; 544 polygons incl. metropolitan thanas)",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BGD/ADM3/geoBoundaries-BGD-ADM3_simplified.geojson",
+      "bytes": 3986002,
+      "sha256": "141dfd271206602793dd0b0af26d4db918be19cff56c1fac46b17dfeb0cbe006"
+    },
+    {
+      "id": "geoboundaries-USA-ADM1",
+      "file": "geoBoundaries-USA-ADM1_simplified.geojson",
+      "license": "Public Domain",
+      "license_url": "https://www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html",
+      "attribution": "US Census Bureau MAF/TIGER, via geoBoundaries",
+      "boundary_version": "USA-ADM1-66186276 (2018)",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM1/geoBoundaries-USA-ADM1_simplified.geojson",
+      "bytes": 5469814,
+      "sha256": "9d7a32244a5c3c2868d039355db2fdd9eb903ef255cfda128decd20bedc0dfbe"
+    },
+    {
+      "id": "geoboundaries-USA-ADM2",
+      "file": "geoBoundaries-USA-ADM2_simplified.geojson",
+      "license": "Public Domain",
+      "license_url": "https://www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html",
+      "attribution": "US Census Bureau MAF/TIGER, via geoBoundaries",
+      "boundary_version": "USA-ADM2-52423323 (2018)",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson",
+      "bytes": 7938450,
+      "sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a"
+    },
+    {
+      "id": "naturalearth-110m-countries",
+      "file": "ne_110m_admin_0_countries.geojson",
+      "license": "Public Domain",
+      "license_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "attribution": "Natural Earth 5.1.2 (public domain)",
+      "boundary_version": "NE 5.1.2 110m admin-0",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson",
+      "bytes": 838726,
+      "sha256": "6866c877d39cba9c357620878839b336d569f8c662d3cfab4cb1dbe2d39c977f"
+    },
+    {
+      "id": "naturalearth-50m-countries",
+      "file": "ne_50m_admin_0_countries.geojson",
+      "license": "Public Domain",
+      "license_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "attribution": "Natural Earth 5.1.2 (public domain)",
+      "boundary_version": "NE 5.1.2 50m admin-0",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_countries.geojson",
+      "bytes": 3083490,
+      "sha256": "3e458fc036ad0a66411f2c1e6cac49c5d7bfb81cb1123bc513b22511a2b7fdeb"
+    }
+  ]
+}

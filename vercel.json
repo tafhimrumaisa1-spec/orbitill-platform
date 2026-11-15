@@ -1,0 +1,33 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "outputDirectory": "apps/web",
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 30,
+      "includeFiles": "{services/**,modules/**,data/**,config/**}"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/health", "destination": "/api/index?route=health" },
+    { "source": "/api/regions", "destination": "/api/index?route=regions" },
+    { "source": "/api/demo/barind/compare", "destination": "/api/index?route=demo/barind/compare" },
+    { "source": "/api/terralens/:path*", "destination": "/api/index?route=terralens/:path*" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), payment=()" }
+      ]
+    },
+    {
+      "source": "/terralens/data/admin/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+      ]
+    }
+  ]
+}

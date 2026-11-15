@@ -1,0 +1,80 @@
+{
+  "FAO56": {
+    "citation": "Allen, R.G., Pereira, L.S., Raes, D., Smith, M. (1998). Crop evapotranspiration - Guidelines for computing crop water requirements. FAO Irrigation and Drainage Paper 56, Rome.",
+    "url": "https://www.fao.org/4/x0490e/x0490e00.htm",
+    "license": "FAO publication, free to read; cite. Coefficients are global published references.",
+    "accessed": "2026-11-14",
+    "geographic_applicability": "Global method; individual coefficients are generic and NOT calibrated for Rajshahi/Barind or Iowa"
+  },
+  "FAO56_EX18": {
+    "citation": "FAO-56 Chapter 4, Example 18: daily ET0 at Uccle (Brussels) on 6 July = 3.9 mm/day",
+    "url": "https://www.fao.org/3/x0490e/x0490e08.htm",
+    "license": "FAO publication", "accessed": "2026-11-14",
+    "geographic_applicability": "Used ONLY as a numerical verification baseline for the ET0 code"
+  },
+  "FAO56_ANNEX1_NV": {
+    "citation": "Typical soil water characteristics for different soil types (from FAO-56 Table 19), as reproduced in Table 1 of the FAO-56 Dual Crop Coefficient Method annex, Nevada Division of Water Resources.",
+    "url": "https://water.nv.gov/mapping/et/Docs/Annex_1.pdf",
+    "license": "public document", "accessed": "2026-11-14",
+    "geographic_applicability": "Generic texture-class ranges; not Barind-specific"
+  },
+  "FAO_IDP_RICE_WATER": {
+    "citation": "FAO Irrigation Water Management training manual no. 3 / irrigation water needs chapter: rice IN = ETc + SAT + PERC + WL - Pe; SAT 200 mm, PERC 4 (heavy clay) to 8 mm/day (sandy), WL 100 mm.",
+    "url": "https://www.fao.org/4/s2022e/s2022e08.htm",
+    "license": "FAO publication", "accessed": "2026-11-14",
+    "geographic_applicability": "Generic paddy water-balance components; percolation in puddled Barind soils needs local measurement"
+  },
+  "WOCAT_AWD_BD": {
+    "citation": "WOCAT technology record 4671, Alternate wetting and drying (AWD) method in rice cultivation [Bangladesh] (cites Riaz et al. 2017).",
+    "url": "https://qcat.wocat.net/wocat/technologies/view/technologies_4671/",
+    "license": "WOCAT open database (CC BY)", "accessed": "2026-11-14",
+    "geographic_applicability": "Bangladesh; reported 20-25% water saving is a field-trial claim, not a model output"
+  },
+  "KHAN_2026_CHICKPEA": {
+    "citation": "Khan, M.S.R., Uddin, M.Z., Moniruzzaman, M., Khatun, A., Oliver, M.M.H. (2026). Irrigation scheduling for improving yield and water productivity of chickpea variety BARI Chola-9. SAARC Journal of Agriculture 24(1): 271-286.",
+    "url": "https://banglajol.info/index.php/SJA/article/view/89671",
+    "license": "Open access journal (BanglaJOL)", "accessed": "2026-11-14",
+    "geographic_applicability": "Gazipur and Godagari (Rajshahi) field trials 2018-19; silty clay loam, FC 28.5-29%. Pod development moisture reported as critical; depths in mm not reported in the text we could access"
+  },
+  "VANCE_2015": {
+    "citation": "Vance, W.H., Bell, R.W., Johansen, C. (2015). Optimum soil water content for chickpea emergence in heavy-textured soils of north-west Bangladesh. J. Agronomy & Crop Science 201(3):195-205. doi:10.1111/jac.12121",
+    "url": "https://doi.org/10.1111/jac.12121",
+    "license": "Journal article (cite)", "accessed": "2026-11-14",
+    "geographic_applicability": "High Barind Tract, Godagari, Rajshahi: soil 48% sand/24% silt/28% clay. No field-capacity number was reported for this soil in the text we accessed, so it is NOT used as TAW"
+  },
+  "KHAN_2025_MUSTARD": {
+    "citation": "Khan, M.A.H., Akhtar, S., Hossain, M.A. (2025). Inclusion of short duration mustard increases productivity and profitability of rice based cropping pattern in north-eastern Bangladesh. Bangladesh J. Agril. Res. 50(4):353-363.",
+    "url": "https://banglajol.info/index.php/BJAR/article/view/92406/59590",
+    "license": "Open access journal (BanglaJOL)", "accessed": "2026-11-14",
+    "geographic_applicability": "North-eastern Bangladesh; BARI Sarisha-14 sowing-to-harvest 76-79 days (2 seasons)"
+  },
+  "ISLAM_2015_BARI": {
+    "citation": "Islam, M.N., Rahman, M.S., Alom, M.S., Akhteruzzaman, M. (2015). Performance of different crops productivity enhancement through adaptation of crop varieties at charland in Bangladesh. Bangladesh J. Agril. Res. 40(4):629-640.",
+    "url": "https://banglajol.info/index.php/BJAR/article/view/26938/17986",
+    "license": "Open access journal (BanglaJOL)", "accessed": "2026-11-14",
+    "geographic_applicability": "Kushtia charland, one 2012-13 trial: BARI Sarisha-14 84 d; BARI Masur-4/5/6 110-111 d"
+  },
+  "NASA_POWER": {
+    "citation": "NASA Prediction Of Worldwide Energy Resources (POWER), Agroclimatology daily. Meteorology from MERRA-2 (0.5 x 0.625 deg), solar from CERES SYN1deg / SRB (1 x 1 deg).",
+    "url": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+    "license": "NASA open data; cite POWER",
+    "accessed": "2026-11-14",
+    "geographic_applicability": "Gridded model/reanalysis estimate, not an in-field sensor, not a forecast. Consumed via EarthSync only."
+  },
+  "NASA_SMAP": {
+    "citation": "SMAP Enhanced L3 Radiometer Global Daily 9 km EASE-Grid Soil Moisture (SPL3SMP_E), NSIDC.",
+    "url": "https://nsidc.org/data/spl3smp_e",
+    "license": "NASA Earthdata open", "accessed": "2026-11-14",
+    "geographic_applicability": "9 km, top ~5 cm only. Used as context disagreement flag, never as root-zone depletion"
+  },
+  "FARMER_GROUND": {
+    "citation": "Farmer-entered events and field tests (irrigation, rainfall, soil moisture, soil test).",
+    "url": "", "license": "User data", "accessed": "n/a",
+    "geographic_applicability": "Specific farm; farmer-reported unless a verified measurement is flagged"
+  },
+  "AQUASENSE_ASSUMPTION": {
+    "citation": "Engineering assumption chosen by the AquaSense author; NOT a published coefficient. Must be replaced or confirmed by local evidence.",
+    "url": "", "license": "n/a", "accessed": "n/a",
+    "geographic_applicability": "none claimed"
+  }
+}
