@@ -1,0 +1,14 @@
+ORBITILL — Final Onboarding + Command Center + Dual Guided Tours
+
+1. Extract this ZIP. Copy apps/web into C:\ORBITILL\orbitill-platform\apps\web, merging existing files and replacing same-named files. Keep all unlisted files, including images, scientific modules, NASA data and APIs.
+2. Open C:\ORBITILL\orbitill-platform\run_local.ps1 to start the integrated server.
+3. Open http://127.0.0.1:8400/start.html and verify the new onboarding page, Barind region selection, Command Center and sidebar.
+4. In the homepage click Experience ORBITILL → region selection → select Barind → Command Center.
+5. TerraLens: select the Barind pilot → Open Barind Command Center. Other regions must not claim operational crop-water comparisons.
+6. Click Explore ORBITILL → Farmer and Visitor tours. Test across pages, mobile layout, Escape/Skip/replay.
+7. On planner.html, adjust rainfall, click Recompute. Check all three scientific outcomes and changed run ID. Inspect Evidence.
+8. For regression checks run Python tests and npm test; npm run audit:web.
+9. If all checks pass, commit in GitHub Desktop and Push origin. Render's existing on-commit deploy should update automatically. Verify production /start.html, /planner.html, /api/health, and POST /api/demo/barind/compare.
+10. Vercel optional only after independent Python API and TerraLens test. Preserve the working Render URL as fallback.
+
+IMPORTANT: No personal field geometry or validated soil data is created. Barind is a conditional regional research pilot. FieldPilot is planned, SoilBrain evidence partial. The separate UX preview HTML is a standalone interactive prototype, not the real model.

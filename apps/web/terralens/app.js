@@ -824,19 +824,20 @@ function renderFarmer(profile) {
   const note = $("farmer-note");
   if (!link) return;
   const allowed = Boolean(profile.farmerMode && profile.farmerMode.allowed);
-  link.href = profile.farmerMode ? profile.farmerMode.href : "#";
-  link.setAttribute("aria-disabled", allowed ? "false" : "true");
+  const supportedBarind = profile.region && profile.region.regionId === "BD-RAJ-BARIND";
+  link.href = supportedBarind ? "../planner.html?region=BD-RAJ-BARIND&from=terralens#command-center" : "#";
+  link.setAttribute("aria-disabled", (allowed && supportedBarind) ? "false" : "true");
   link.onclick = (event) => {
     event.preventDefault();
-    if (!allowed) {
-      toast((profile.farmerMode && profile.farmerMode.reason) || t("farmerDisabledNote"));
+    if (!allowed || !supportedBarind) {
+      toast("Only the Barind research pilot currently supports the crop-water Command Center. Explore this location in TerraLens instead.");
       return;
     }
-    handOffToFarmer(profile.farmerMode.href);
+    handOffToFarmer(link.href);
   };
   if (note) {
-    note.textContent = allowed
-      ? t("farmerHandoffNote")
+    note.textContent = (allowed && supportedBarind)
+      ? "Opens the Barind research Command Center; no personal field is measured."
       : (profile.farmerMode && profile.farmerMode.reason) || t("farmerDisabledNote");
   }
 }

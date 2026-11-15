@@ -35,9 +35,12 @@ async function runComparison(){
     const data = await response.json();
     if(!response.ok) throw new Error(data.message || 'The model request was refused.');
     latest = data;
+    window.__orbitillLastComparison = data;
     render(data);
+    window.dispatchEvent(new CustomEvent("orbitill:model-ready", {detail:data}));
   }catch(error){
     latest = null;
+    window.dispatchEvent(new CustomEvent('orbitill:model-error'));
     runState.textContent = 'Model unavailable';
     runId.textContent = 'No result';
     results.innerHTML = `<div class="error-card"><strong>The scientific service is not running.</strong><p>${escapeHtml(error.message)}</p><p>Start the ORBITILL integration server; this page will not substitute precomputed numbers.</p></div>`;

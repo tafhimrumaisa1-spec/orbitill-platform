@@ -9,7 +9,10 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="planner.css">
   <link rel="stylesheet" href="planner-mobile.css">
-  <title>RootShift · Barind research demonstration</title>
+  <link rel="stylesheet" href="field-experience.css">
+  <link rel="stylesheet" href="command-center.css">
+  <title>ORBITILL Command Center · Barind research demonstration</title>
+  <link rel="stylesheet" href="orbitill-guide.css">
 </head>
 <body class="planner-body">
   <header class="planner-nav">
@@ -17,9 +20,29 @@
     <a class="planner-brand" href="index.html"><span class="seed-mark" aria-hidden="true"><i></i><i></i><i></i></span>ORBITILL</a>
     <nav aria-label="Research experience"><a href="bangladesh.html">Bangladesh</a><a href="planner.html" aria-current="page">RootShift</a><a href="#evidence">Evidence</a></nav>
     <span class="pilot-badge"><i></i> Research demonstration</span>
+
   </header>
 
-  <main>
+  <div class="or-workspace">
+    <aside class="or-sidebar" id="or-sidebar" aria-label="Agricultural workspace tools">
+      <div class="or-sidebar-brand">FIELD WORKSPACE <span>BARIND RESEARCH PILOT</span></div><a class="or-switch-region" href="start.html">← Choose region</a>
+      <nav class="or-side-nav" aria-label="Field tools">
+        <a class="or-side-active" href="#command-center" id="nav-command">▦ <span>Command Center<small>Field overview</small></span></a>
+        <a href="terralens/index.html" id="nav-terralens">◎ <span>TerraLens<small>Explore locations</small></span></a>
+        <a href="#soilbrain-panel" id="nav-soilbrain">❀ <span>SoilBrain<small>Evidence availability</small></span></a>
+        <a href="#water-panel" id="nav-aquasense">≋ <span>AquaSense<small>Modeled crop water</small></span></a>
+        <a href="#scenario-heading" id="nav-rootshift">⇄ <span>RootShift<small>Compare pathways</small></span></a>
+        <a href="#scenario-heading" id="nav-futurefields">◈ <span>FutureFields<small>Scenario experiment</small></span></a>
+        <a href="#fieldpilot-panel" id="nav-fieldpilot">✳ <span>FieldPilot<small>Planned · not live</small></span></a>
+        <a href="#evidence" id="nav-evidencelayer">◉ <span>EvidenceLayer<small>Sources and limitations</small></span></a>
+      </nav>
+      <div class="or-sidebar-foot"><b>BARIND PILOT</b><p>Regional research demonstration. Not individualized farm advice.</p><button type="button" data-orbitill-tour-open>↗ Guided tour</button></div>
+    </aside>
+    <main class="or-workspace-main">
+    <section class="or-command-intro" id="command-center">
+      <div><p class="or-eyebrow">01 / YOUR AGRICULTURAL COMMAND CENTER</p><h1>Understand your land.<br><em>Explore what comes next.</em></h1><p id="or-selected-context">Barind research region selected. Review available evidence, compare water implications and test assumptions—all in one workspace. This is not a measured individual field.</p></div>
+      <div class="or-start-flow" id="or-start-flow"><span>YOUR JOURNEY · REGION INITIALIZED</span><b>① Select region <span>→</span> ② Review evidence <span>→</span> ③ Compare <span>→</span> ④ Test <span>→</span> ⑤ Verify</b><a href="start.html">Change research region ↗</a></div>
+    </section>
     <section class="planner-intro">
       <div>
         <p class="planner-kicker">Barind Highlands · one field · three pathways</p>
@@ -30,6 +53,28 @@
         <span>Analysis status</span><strong>Conditional</strong>
         <p>Water implications can be explored. Yield, profit and an overall “best” crop are not calculated.</p>
       </aside>
+    </section>
+
+    <section class="field-overview" id="field-overview" aria-labelledby="field-overview-title">
+      <div class="field-overview-top">
+        <div><p class="section-number">YOUR FIELD / RESEARCH PILOT</p><h2 id="field-overview-title">The whole picture.<br><em>Before the next season.</em></h2><p>Start here. This overview brings together the environmental source, your water assumptions and the three crop pathways in one place.</p></div>
+        <span class="field-demo-tag">BARIND · RESEARCH DEMO</span>
+      </div>
+      <div class="field-summary-grid">
+        <article class="field-summary-card" id="field-location"><span>01 / LOCATION</span><strong>Barind, Rajshahi</strong><p>Bangladesh · regional demonstration, not a measured individual farm</p></article>
+        <article class="field-summary-card" id="field-weather"><span>02 / WEATHER EVIDENCE</span><strong>NASA POWER</strong><p>Historical gridded environmental observations, 1991–2025</p></article>
+        <article class="field-summary-card" id="field-water"><span>03 / YOUR SCENARIO</span><strong id="overview-rainfall">100% rainfall</strong><p id="overview-allowance">700 mm seasonal irrigation allowance</p></article>
+        <article class="field-summary-card" id="field-confidence"><span>04 / MODEL STATUS</span><strong id="overview-status">Calculating…</strong><p>Conditional water analysis · soil and calendars contain assumptions</p></article>
+      </div>
+      <div class="field-pathway-overview" id="field-pathways"><div><p class="section-number">THREE SEASONAL PATHWAYS</p><h3>Compare your options</h3><p>All pathways use the same selected scenario. Results appear here when the model completes.</p></div><div id="overview-pathways" class="overview-pathway-list" aria-live="polite"><p>Loading comparisons…</p></div></div>
+      <div class="field-overview-actions"><a href="#scenario-heading">Adjust rainfall & water →</a><a href="#evidence">Inspect NASA evidence →</a><button type="button" data-orbitill-tour-open>Guide me through ORBITILL ↗</button></div>
+      <p class="overview-disclaimer">Research demonstration only. Water values are modeled, not observed irrigation use. This overview does not measure your field or recommend a crop.</p>
+    </section>
+
+    <section class="or-module-status" aria-label="Field conditions and module readiness">
+      <article id="soilbrain-panel"><span>SOILBRAIN / LOCAL SOIL EVIDENCE</span><h3>Know what is measured—and what isn't.</h3><p>This research pilot uses declared soil assumptions; there is no verified soil measurement for an individual field. Soil suitability has not been locally validated.</p><a href="#evidence">Review evidence limits ↗</a></article>
+      <article id="water-panel"><span>AQUASENSE / CROP WATER</span><h3>Translate weather into water questions.</h3><p>The model estimates seasonal water implications using NASA POWER weather and declared crop and irrigation assumptions. It does not measure groundwater or actual farm withdrawals.</p><a href="#scenario-heading">See calculated water results ↗</a></article>
+      <article id="fieldpilot-panel"><span>FIELDPILOT / PLANNED MODULE</span><h3>Conversational guidance is not live.</h3><p>A farmer-oriented assistant is on the roadmap. For now, use the guided tour and the clear explanations beside each result.</p><button type="button" data-orbitill-tour-open>Open the guided tour ↗</button></article>
     </section>
 
     <section class="scenario-workbench" aria-labelledby="scenario-heading">
@@ -68,9 +113,11 @@
       <div><p class="section-number">04 / KEEP EXPLORING</p><h2>One pilot.<br><em>A global responsibility.</em></h2></div>
       <div class="next-links"><a href="bangladesh.html"><span>Bangladesh story</span><b>Return to the national context →</b></a><a href="index.html"><span>Global experience</span><b>Explore the planetary story →</b></a><a href="usa.html"><span>United States</span><b>Open the Iowa research pilot →</b></a></div>
     </section>
-  </main>
-
+    </main>
+  </div>
   <dialog class="evidence-dialog" id="evidence-dialog" aria-labelledby="dialog-title"><button type="button" data-close aria-label="Close evidence">×</button><div id="dialog-content"></div></dialog>
   <script src="planner.js" type="module"></script>
+  <script src="field-experience.js" type="module"></script>
+  <script src="orbitill-guide.js" defer></script>
 </body>
 </html>
